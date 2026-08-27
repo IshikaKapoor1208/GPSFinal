@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --brand-navy: #1f216b;
+  --brand-navy-dark: #14164f;
+  --brand-navy-accent: #2b2e8f;
+  --brand-navy-light: #383db5;
+  --brand-ice: #eef2fb;
+  --brand-ice-light: #f5f7fd;
+  --brand-gold: #d2ac65;
+  --brand-gold-dark: #b88e44;
+  --brand-cream: #f8fafc;
+  --brand-card-bg: #ffffff;
+  --border-subtle: #e2e6ee;
+  --border-card: #e5e9f2;
+}
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Newsreader", "Playfair Display", "Cormorant Garamond", Georgia, Cambria, serif;
+  --color-brand-navy: #1f216b;
+  --color-brand-navy-dark: #14164f;
+  --color-brand-navy-accent: #2b2e8f;
+  --color-brand-navy-light: #383db5;
+  --color-brand-ice: #eef2fb;
+  --color-brand-ice-light: #f5f7fd;
+  --color-brand-gold: #d2ac65;
+  --color-brand-gold-dark: #b88e44;
+  --color-brand-cream: #f8fafc;
+  --color-border-subtle: #e2e6ee;
+  --color-border-card: #e5e9f2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+.font-serif {
+  font-family: "Newsreader", "Playfair Display", "Cormorant Garamond", Georgia, Cambria, serif;
+}
+
+.font-sans {
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+::selection {
+  background: #1f216b;
+  color: #ffffff;
+}
+
+/* Subtle dot matrix pattern */
+.bg-dot-pattern {
+  background-image: radial-gradient(#1f216b 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Infinite Marquee animations */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Custom Light Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccd4e6;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1f216b;
+}
