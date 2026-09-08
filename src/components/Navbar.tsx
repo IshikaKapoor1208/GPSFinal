@@ -155,25 +155,17 @@ export default function Navbar({
             >
               <span>Contact Us</span>
             </a>
+          </nav>
 
+          {/* Right Header Actions: Request Call Back Button */}
+          <div className="hidden lg:flex items-center gap-4">
+            {/* Request Call Back Navy Pill Button */}
             <button
               suppressHydrationWarning
               onClick={onOpenCallback}
-              className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155] cursor-pointer"
-            >
-              <span>Request Call Back Form</span>
-            </button>
-          </nav>
-
-          {/* Right Header Actions: Book Service Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            {/* Book Service Navy Pill Button */}
-            <button
-              suppressHydrationWarning
-              onClick={onStartAgreement}
               className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-[#1F216B] hover:bg-[#14164F] text-white text-sm font-semibold shadow-xs hover:shadow-md transition-all cursor-pointer group"
             >
-              <span>Book Service</span>
+              <span>Request Call Back</span>
               <ArrowRight className="w-3.5 h-3.5 text-white group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
@@ -182,10 +174,10 @@ export default function Navbar({
           <div className="flex items-center gap-2 lg:hidden">
             <button
               suppressHydrationWarning
-              onClick={onStartAgreement}
+              onClick={onOpenCallback}
               className="px-4 py-2 rounded-full bg-[#1F216B] text-white text-xs font-semibold"
             >
-              Book Service
+              Request Call Back
             </button>
 
             <button
@@ -247,27 +239,17 @@ export default function Navbar({
               >
                 Contact Us
               </a>
-              <button
-                suppressHydrationWarning
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenCallback();
-                }}
-                className="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC] flex items-center gap-2 cursor-pointer"
-              >
-                <span>Request Call Back Form</span>
-              </button>
 
               <div className="pt-3 mt-2 border-t border-[#E2E6EE] flex flex-col gap-2">
                 <button
                   suppressHydrationWarning
                   onClick={() => {
                     setMobileMenuOpen(false);
-                    onStartAgreement();
+                    onOpenCallback();
                   }}
                   className="w-full py-3 rounded-full font-semibold text-sm text-white bg-[#1F216B] flex items-center justify-center gap-2 cursor-pointer shadow-md"
                 >
-                  <span>Book Documentation Service</span>
+                  <span>Request Call Back</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

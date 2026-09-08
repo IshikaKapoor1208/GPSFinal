@@ -55,7 +55,10 @@ export default function Home() {
     if (serviceName) {
       setSelectedService(serviceName);
     }
-    setWizardModalOpen(true);
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   const handleOpenCallback = (serviceName?: string) => {
@@ -72,7 +75,10 @@ export default function Home() {
   const handleSelectServiceFromCatalog = (serviceName: string) => {
     setSelectedService(serviceName);
     setAllServicesModalOpen(false);
-    setWizardModalOpen(true);
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   const handleOpenZoomModal = (videoIndex?: number) => {
