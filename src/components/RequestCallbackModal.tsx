@@ -224,6 +224,7 @@ export default function RequestCallbackModal({
                           <option value="Partnership Deed Registration">Partnership Deed Registration</option>
                           <option value="Court Marriage & Registered Marriage">Court Marriage &amp; Registered Marriage</option>
                           <option value="Passport / PAN / Aadhaar Services">Passport / PAN / Aadhaar Services</option>
+                          <option value="Other">Other</option>
                         </select>
                       </div>
                     </div>

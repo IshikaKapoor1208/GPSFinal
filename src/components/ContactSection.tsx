@@ -328,6 +328,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                           <option value="Court Marriage & Registered Marriage">Court Marriage &amp; Registered Marriage</option>
                           <option value="Passport / PAN / Aadhaar Services">Passport / PAN / Aadhaar Services</option>
                           <option value="Food License / Shop Act License">Food License / Shop Act License</option>
+                          <option value="Other">Other</option>
                         </select>
                       </div>
                     </div>
