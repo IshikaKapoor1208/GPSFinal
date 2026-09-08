@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, HelpCircle, MessageCircle } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
+import WhatsappIcon from "@/components/WhatsappIcon";
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -125,7 +126,7 @@ export default function FaqSection() {
             rel="noopener noreferrer"
             className="px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold shadow-xs flex items-center gap-2 whitespace-nowrap transition-all"
           >
-            <MessageCircle className="w-4 h-4 fill-current" />
+            <WhatsappIcon size={16} color="white" strokeWidth={2} />
             <span>Chat on WhatsApp</span>
           </a>
         </div>

@@ -1,8 +1,6 @@
 "use client";
 
-import React from "react";
 import {
-  MessageCircle,
   Mail,
   Phone,
   ArrowUp,
@@ -11,6 +9,7 @@ import {
   Clock,
 } from "lucide-react";
 import Logo from "@/components/Logo";
+import WhatsappIcon from "@/components/WhatsappIcon";
 
 interface FooterProps {
   onStartAgreement: () => void;
@@ -52,7 +51,7 @@ export default function Footer({
               rel="noopener noreferrer"
               className="px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm flex items-center gap-2 transition-all"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
+              <WhatsappIcon size={16} color="white" strokeWidth={2} />
               <span>WhatsApp Us</span>
             </a>
 
@@ -71,7 +70,9 @@ export default function Footer({
           
           {/* Col 1: Brand Info */}
           <div className="space-y-4">
-            <Logo size="md" variant="light" />
+            <div className="inline-flex items-center bg-white px-3 py-2 rounded-2xl shadow-sm">
+              <Logo size="md" variant="dark" />
+            </div>
             <p className="text-xs text-white/70 leading-relaxed max-w-xs">
               Go Prime Services provides government and private services from the comfort of your home as a Common Service Centre under the Digital India program.
             </p>
@@ -168,7 +169,7 @@ export default function Footer({
             </h4>
             <ul className="space-y-3 text-xs text-white/80">
               <li className="flex items-center gap-2.5">
-                <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                <WhatsappIcon size={16} color="#25D366" strokeWidth={2} />
                 <a
                   href="https://wa.me/919421215055"
                   target="_blank"

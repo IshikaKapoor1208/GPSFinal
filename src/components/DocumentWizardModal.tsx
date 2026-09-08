@@ -12,11 +12,11 @@ import {
   ArrowRight,
   ArrowLeft,
   CheckCircle2,
-  MessageCircle,
   Clock,
   ShieldCheck,
 } from "lucide-react";
 import Logo from "@/components/Logo";
+import WhatsappIcon from "@/components/WhatsappIcon";
 
 interface DocumentWizardModalProps {
   isOpen: boolean;
@@ -162,7 +162,7 @@ export default function DocumentWizardModal({
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-xs sm:text-sm text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm transition-all"
                 >
-                  <MessageCircle className="w-4 h-4 fill-current" />
+                  <WhatsappIcon size={16} color="white" strokeWidth={2} />
                   <span>Chat with Legal Desk on WhatsApp</span>
                 </a>
                 <button

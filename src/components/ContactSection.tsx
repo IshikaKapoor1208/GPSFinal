@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { submitLead } from "@/lib/api";
 import {
-  MessageCircle,
   Mail,
   Phone,
   MapPin,
@@ -13,6 +12,7 @@ import {
   Send,
   CheckCircle2,
 } from "lucide-react";
+import WhatsappIcon from "@/components/WhatsappIcon";
 
 interface ContactSectionProps {
   selectedServicePreset?: string;
@@ -110,7 +110,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
               >
                 <div className="flex items-center gap-3.5">
                   <div className="w-10 h-10 rounded-xl bg-[#25D366] text-white flex items-center justify-center shadow-xs">
-                    <MessageCircle className="w-5 h-5 fill-current" />
+                    <WhatsappIcon size={20} color="white" strokeWidth={2} />
                   </div>
                   <div>
                     <span className="text-xs font-bold text-[#0F172A] block">WhatsApp Support</span>
@@ -215,7 +215,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-xs text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm transition-all"
                       >
-                        <MessageCircle className="w-4 h-4 fill-current" />
+                        <WhatsappIcon size={16} color="white" strokeWidth={2} />
                         <span>Chat on WhatsApp Now</span>
                       </a>
 

@@ -17,9 +17,9 @@ import {
   Utensils,
   Store,
   ArrowRight,
-  MessageCircle,
 } from "lucide-react";
 import Logo from "@/components/Logo";
+import WhatsappIcon from "@/components/WhatsappIcon";
 
 interface AllServicesModalProps {
   isOpen: boolean;
@@ -250,7 +250,7 @@ export default function AllServicesModal({
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 text-xs font-bold text-[#25D366] hover:text-[#1EBE5D]"
                       >
-                        <MessageCircle className="w-3.5 h-3.5 fill-current" />
+                        <WhatsappIcon size={14} color="#25D366" strokeWidth={2} />
                         <span>WhatsApp</span>
                       </a>
 

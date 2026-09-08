@@ -10,8 +10,8 @@ import {
   Award,
   Lock,
   ArrowRight,
-  MessageCircle,
 } from "lucide-react";
+import WhatsappIcon from "@/components/WhatsappIcon";
 
 interface AboutSectionProps {
   onRequestCallback: () => void;
@@ -80,7 +80,7 @@ export default function AboutSection({ onRequestCallback }: AboutSectionProps) {
                 rel="noopener noreferrer"
                 className="px-6 py-3.5 rounded-full font-bold text-xs sm:text-sm text-[#1F216B] bg-[#F8FAFC] hover:bg-white border border-[#E2E6EE] transition-all flex items-center gap-2"
               >
-                <MessageCircle className="w-4 h-4 text-[#25D366] fill-current" />
+                <WhatsappIcon size={16} color="#25D366" strokeWidth={2} />
                 <span>Chat on WhatsApp</span>
               </a>
             </div>

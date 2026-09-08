@@ -9,10 +9,10 @@ import {
   User,
   Clock,
   CheckCircle2,
-  MessageCircle,
   FileText,
 } from "lucide-react";
 import Logo from "@/components/Logo";
+import WhatsappIcon from "@/components/WhatsappIcon";
 
 interface RequestCallbackModalProps {
   isOpen: boolean;
@@ -127,7 +127,7 @@ export default function RequestCallbackModal({
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-xs text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm transition-all"
                   >
-                    <MessageCircle className="w-4 h-4 fill-current" />
+                    <WhatsappIcon size={16} color="white" strokeWidth={2} />
                     <span>Chat on WhatsApp Now</span>
                   </a>
                   <button

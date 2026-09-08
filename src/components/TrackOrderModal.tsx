@@ -12,9 +12,9 @@ import {
   Fingerprint,
   Stamp,
   Phone,
-  MessageCircle,
 } from "lucide-react";
 import Logo from "@/components/Logo";
+import WhatsappIcon from "@/components/WhatsappIcon";
 
 interface TrackOrderModalProps {
   isOpen: boolean;
@@ -196,7 +196,7 @@ export default function TrackOrderModal({
                 rel="noopener noreferrer"
                 className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#1F216B] hover:text-[#D2AC65] underline"
               >
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+                <WhatsappIcon size={14} color="#16a34a" strokeWidth={2} />
                 <span>Track on WhatsApp →</span>
               </a>
             </div>
