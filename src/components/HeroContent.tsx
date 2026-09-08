@@ -32,7 +32,7 @@ export default function HeroContent({
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[#1F216B] text-xs font-semibold tracking-wide border border-[#CCD6F0] shadow-2xs"
           >
             <span className="w-2 h-2 rounded-full bg-[#16A34A] animate-pulse" />
-            <span>Doorstep Verification across Bengaluru · Delhi NCR · Mumbai</span>
+            <span>Doorstep verification across Maharashtra, India, and worldwide</span>
           </motion.div>
 
           {/* Main Headline (Sans bold + Italic Serif in brand navy) */}
@@ -42,12 +42,12 @@ export default function HeroContent({
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <h1 className="text-4xl sm:text-6xl xl:text-[4.25rem] font-bold text-[#0F172A] tracking-tight leading-[1.08]">
-              Official agreements. <br />
+              Registered Rent Agreement Services. <br />
               <span
                 className="font-serif italic font-normal text-[#2B2E8F] inline-block mt-1 sm:mt-1.5"
                 style={{ fontFamily: "var(--font-serif), 'Newsreader', Georgia, serif" }}
               >
-                Without the waiting line.
+                Doorstep convenience.
               </span>
             </h1>
           </motion.div>
@@ -59,7 +59,7 @@ export default function HeroContent({
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-base sm:text-lg text-[#334155] max-w-xl font-normal leading-relaxed"
           >
-            Registered rent agreements, notarised affidavits, and property documentation — drafted accurately, verified with UIDAI biometrics, and delivered to your doorstep within 48 hours.
+            Need a rent agreement? Contact us for quick support, easy documentation, and doorstep assistance with government-compliant registration.
           </motion.p>
 
           {/* Action Pill Buttons */}
@@ -71,19 +71,21 @@ export default function HeroContent({
           >
             {/* Primary Pill Button */}
             <button
+              suppressHydrationWarning
               onClick={onStartAgreement}
               className="px-7 py-4 rounded-full font-semibold text-sm sm:text-base text-white bg-[#1F216B] hover:bg-[#14164F] shadow-md hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group"
             >
-              <span>Create Your Agreement</span>
+              <span>Request Call Back</span>
               <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
             </button>
 
             {/* Secondary Outlined Pill Button */}
             <button
+              suppressHydrationWarning
               onClick={onOpenAllServices}
               className="px-6 py-4 rounded-full font-semibold text-sm sm:text-base text-[#1F216B] bg-white/90 hover:bg-white border border-[#CCD4E6] hover:border-[#1F216B] shadow-2xs transition-all duration-200 flex items-center justify-center cursor-pointer backdrop-blur-sm"
             >
-              <span>Explore All Documentation</span>
+              <span>Explore Our Services</span>
             </button>
           </motion.div>
 
@@ -96,19 +98,19 @@ export default function HeroContent({
           >
             <div>
               <div className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                5,000<sup className="text-base sm:text-lg font-bold text-[#2B2E8F]">+</sup>
+                1,000<sup className="text-base sm:text-lg font-bold text-[#2B2E8F]">+</sup>
               </div>
               <div className="text-[10px] sm:text-xs font-bold text-[#64748B] tracking-wider uppercase mt-0.5">
-                REGISTERED AGREEMENTS
+                HAPPY CUSTOMERS
               </div>
             </div>
 
             <div>
               <div className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                48<span className="text-sm sm:text-base font-normal text-[#475569] ml-1">hrs</span>
+                5<span className="text-sm sm:text-base font-normal text-[#475569] ml-1">yrs</span>
               </div>
               <div className="text-[10px] sm:text-xs font-bold text-[#64748B] tracking-wider uppercase mt-0.5">
-                DOORSTEP TURNAROUND
+                EXPERIENCE
               </div>
             </div>
 
@@ -117,7 +119,7 @@ export default function HeroContent({
                 4.9 <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-[#D2AC65] text-[#D2AC65]" />
               </div>
               <div className="text-[10px] sm:text-xs font-bold text-[#64748B] tracking-wider uppercase mt-0.5">
-                CUSTOMER SATISFACTION
+                CUSTOMER TRUST
               </div>
             </div>
           </motion.div>

@@ -12,6 +12,10 @@ import {
   ScrollText,
   Home,
   Scale,
+  IdCard,
+  Car,
+  Utensils,
+  Store,
   ArrowRight,
   MessageCircle,
 } from "lucide-react";
@@ -37,53 +41,123 @@ export default function AllServicesModal({
       badge: "Most Popular",
     },
     {
-      title: "Police Verification",
-      category: "Verification",
-      icon: ShieldAlert,
-      desc: "Comprehensive tenant, domestic staff, and employee police background verification for total peace of mind.",
-      badge: "Quick 24h",
-    },
-    {
-      title: "Leave & License Agreement",
+      title: "Notarized Rent Agreement",
       category: "Rental & Tenancy",
       icon: FileSignature,
-      desc: "Drafting and official government registration of Leave & License agreements for commercial and residential properties.",
-      badge: "Standard",
+      desc: "Get a professionally drafted and notarized rent agreement for your rental needs.",
+      badge: "Notary",
     },
     {
-      title: "Sale Deed Documentation",
-      category: "Property & Real Estate",
+      title: "Partnership Deed Registration",
+      category: "Business Documentation",
       icon: Building2,
-      desc: "End-to-end drafting, indexing, stamp duty assistance, and sub-registrar registration for property purchases.",
-      badge: "High Value",
+      desc: "Draft and register partnership deeds with complete legal documentation support.",
+      badge: "Business",
     },
     {
-      title: "Power of Attorney (PoA)",
-      category: "Legal & Authorization",
+      title: "Court Marriage & Registered Marriage",
+      category: "Marriage Registration",
       icon: FileBadge,
-      desc: "General Power of Attorney (GPA) and Special Power of Attorney (SPA) drafting, notarization, and registration.",
-      badge: "Legal",
+      desc: "End-to-end assistance for court marriage and marriage registration documentation.",
+      badge: "Marriage",
     },
     {
-      title: "Gift Deed & Will Registration",
-      category: "Estate & Succession",
-      icon: ScrollText,
-      desc: "Legally compliant drafting of Gift Deeds, Wills, and Codicils with witness coordination and sub-registrar filing.",
-      badge: "Confidential",
+      title: "Passport (New & Renewal)",
+      category: "Identity Services",
+      icon: IdCard,
+      desc: "Apply for a new passport or renew your existing passport with expert guidance.",
+      badge: "Passport",
     },
     {
-      title: "Society NOC & Transfer",
-      category: "Housing Societies",
+      title: "New PAN Card & PAN Updates",
+      category: "Identity Services",
+      icon: IdCard,
+      desc: "Apply for a new PAN card or update your name, photo, address, or other details.",
+      badge: "PAN",
+    },
+    {
+      title: "PAN-Aadhaar Linking",
+      category: "Compliance",
+      icon: ShieldAlert,
+      desc: "Link your PAN with Aadhaar quickly to ensure compliance with government requirements.",
+      badge: "Compliance",
+    },
+    {
+      title: "Aadhaar Card Duplicate / Reprint",
+      category: "Identity Services",
+      icon: IdCard,
+      desc: "Apply for a duplicate or PVC Aadhaar card with a simple and hassle-free process.",
+      badge: "Aadhaar",
+    },
+    {
+      title: "Voter ID (New Registration & Updates)",
+      category: "Identity Services",
+      icon: IdCard,
+      desc: "Register for a new Voter ID or update existing details such as name, address, or photo.",
+      badge: "Voter ID",
+    },
+    {
+      title: "Driving Licence Name & Address Change",
+      category: "Vehicle Services",
+      icon: Car,
+      desc: "Update your driving licence details accurately with complete documentation assistance.",
+      badge: "Licence",
+    },
+    {
+      title: "Electricity Bill Name Correction",
+      category: "Utility Services",
       icon: Home,
-      desc: "Preparation of society share certificate transfers, associate membership applications, and NOC documentation.",
-      badge: "Housing",
+      desc: "Transfer or correct the name on your electricity bill with expert support.",
+      badge: "Utility",
     },
     {
-      title: "Title Verification & Search Report",
-      category: "Property & Real Estate",
+      title: "Choice Number for Vehicles",
+      category: "Vehicle Services",
+      icon: Car,
+      desc: "Book your preferred vehicle registration number through the official process.",
+      badge: "Fancy No.",
+    },
+    {
+      title: "HSRP Number Plate Booking",
+      category: "Vehicle Services",
+      icon: Car,
+      desc: "Book High Security Registration Plates for your vehicle with ease.",
+      badge: "HSRP",
+    },
+    {
+      title: "Gazette Name Change",
+      category: "Legal Documentation",
+      icon: ScrollText,
+      desc: "Complete your official name change process through Gazette publication.",
+      badge: "Gazette",
+    },
+    {
+      title: "Digital 7/12 & 8A Documents",
+      category: "Land Records",
       icon: Scale,
-      desc: "30-year property title verification, search report from registrar archives, and encumbrance certification.",
-      badge: "Due Diligence",
+      desc: "Obtain certified digital land records including 7/12 extract and 8A documents.",
+      badge: "Land",
+    },
+    {
+      title: "Udyam Registration (MSME)",
+      category: "Business Documentation",
+      icon: Building2,
+      desc: "Register your business under Udyam (MSME) to avail government benefits and schemes.",
+      badge: "MSME",
+    },
+    {
+      title: "Food License (FSSAI)",
+      category: "Business Licenses",
+      icon: Utensils,
+      desc: "Get assistance in obtaining or renewing your FSSAI Food License for your business.",
+      badge: "FSSAI",
+    },
+    {
+      title: "Shop Act License",
+      category: "Business Licenses",
+      icon: Store,
+      desc: "Register your business under the Shop and Establishment Act quickly and compliantly.",
+      badge: "Shop Act",
     },
   ];
 
@@ -123,14 +197,15 @@ export default function AllServicesModal({
                   Complete Catalog
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-[#0F172A]">
-                  All Documentation Services
+                  Our Services
                 </h3>
                 <p className="text-xs sm:text-sm text-[#555D75] mt-1">
-                  Choose a service to speak with a documentation specialist or request doorstep assistance.
+                  Choose a government or private service to request doorstep assistance.
                 </p>
               </div>
 
               <button
+                suppressHydrationWarning
                 onClick={onClose}
                 className="w-10 h-10 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] hover:bg-[#1F216B] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
                 aria-label="Close modal"
@@ -168,7 +243,7 @@ export default function AllServicesModal({
 
                     <div className="pt-3 border-t border-[#F8FAFC] flex items-center justify-between">
                       <a
-                        href={`https://wa.me/919876543210?text=${encodeURIComponent(
+                        href={`https://wa.me/919421215055?text=${encodeURIComponent(
                           `Hello Go Prime Services! I would like to inquire about ${service.title}.`
                         )}`}
                         target="_blank"
@@ -180,6 +255,7 @@ export default function AllServicesModal({
                       </a>
 
                       <button
+                        suppressHydrationWarning
                         onClick={() => handleInquire(service.title)}
                         className="inline-flex items-center gap-1 text-xs font-bold text-[#1F216B] hover:text-[#D2AC65] transition-colors cursor-pointer"
                       >
@@ -194,14 +270,14 @@ export default function AllServicesModal({
 
             {/* Footer */}
             <div className="p-4 sm:p-6 border-t border-[#E2E6EE] bg-white flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#555D75]">
-              <span>🛡️ 100% Legally Compliant &amp; Government Registered</span>
+              <span>100% transparent doorstep service and government-compliant support</span>
               <a
-                href="https://wa.me/919876543210?text=Hi%20Go%20Prime%20Services,%20I%20have%20a%20custom%20documentation%20requirement"
+                href="https://wa.me/919421215055?text=Hi%20Go%20Prime%20Services,%20I%20have%20a%20custom%20documentation%20requirement"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-bold text-[#1F216B] hover:text-[#D2AC65] underline"
               >
-                Custom documentation need? Contact us on WhatsApp →
+                Need help with another service? Contact us on WhatsApp
               </a>
             </div>
           </motion.div>

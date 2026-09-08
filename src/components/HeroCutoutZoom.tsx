@@ -343,7 +343,7 @@ export default function HeroCutoutZoom({
                 .cutout-brand-text {
                   font-size: 172px;
                   font-weight: 900;
-                  letter-spacing: -0.035em;
+                  letter-spacing: 0;
                   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 }
                 @media (max-width: 768px) {
@@ -365,6 +365,8 @@ export default function HeroCutoutZoom({
                     y="450"
                     textAnchor="middle"
                     dominantBaseline="central"
+                    textLength="1460"
+                    lengthAdjust="spacingAndGlyphs"
                     className="cutout-brand-text"
                   >
                     GoPrimeServices

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { submitLead } from "@/lib/api";
 import {
   MessageCircle,
   Mail,
@@ -18,8 +19,9 @@ interface ContactSectionProps {
 }
 
 export default function ContactSection({ selectedServicePreset = "" }: ContactSectionProps) {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [localSubmitted, setLocalSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -29,14 +31,37 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  const isSuccess = localSubmitted;
 
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 600);
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitError("");
+
+    // Validate phone number (must be exactly 10 digits)
+    const cleanedPhone = formData.phone.replace(/\D/g, "");
+    if (cleanedPhone.length !== 10) {
+      setSubmitError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    // Validate email if provided (must contain @ and valid domain)
+    if (formData.email.trim()) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!formData.email.includes("@") || !emailPattern.test(formData.email.trim())) {
+        setSubmitError("Please enter a valid email address with '@' (e.g. yourname@gmail.com).");
+        return;
+      }
+    }
+
+    setSubmitting(true);
+    try {
+      await submitLead("/api/v1/inquiries", { ...formData, phone: cleanedPhone });
+      setLocalSubmitted(true);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Unable to submit your request. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const whatsappMessage = encodeURIComponent(
@@ -78,7 +103,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
 
               {/* WhatsApp Action Card */}
               <a
-                href="https://wa.me/919876543210?text=Hello%20Go%20Prime%20Services!%20I%20need%20assistance%20with%20legal%20documentation."
+                href="https://wa.me/919421215055?text=Hello%20Go%20Prime%20Services!%20I%20need%20assistance%20with%20legal%20documentation."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-4 rounded-2xl bg-[#EEF2FB] border border-[#CCD6F0] hover:border-[#1F216B] transition-all flex items-center justify-between group cursor-pointer"
@@ -89,7 +114,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                   </div>
                   <div>
                     <span className="text-xs font-bold text-[#0F172A] block">WhatsApp Support</span>
-                    <span className="text-xs text-[#555D75]">+91 98765 43210</span>
+                    <span className="text-xs text-[#555D75]">+91 94212 15055</span>
                   </div>
                 </div>
                 <span className="text-xs font-bold text-[#1F216B] group-hover:underline">
@@ -99,7 +124,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
 
               {/* Email Card */}
               <a
-                href="mailto:contact@goprimeservices.com"
+                href="mailto:contactgoprimeservices@gmail.com"
                 className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E6EE] hover:border-[#1F216B] transition-all flex items-center justify-between group cursor-pointer"
               >
                 <div className="flex items-center gap-3.5">
@@ -108,7 +133,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                   </div>
                   <div>
                     <span className="text-xs font-bold text-[#0F172A] block">Official Email</span>
-                    <span className="text-xs text-[#555D75]">contact@goprimeservices.com</span>
+                    <span className="text-xs text-[#555D75]">contactgoprimeservices@gmail.com</span>
                   </div>
                 </div>
                 <span className="text-xs font-bold text-[#1F216B] group-hover:underline">
@@ -118,7 +143,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
 
               {/* Phone Desk */}
               <a
-                href="tel:+919876543210"
+                href="tel:+919421215055"
                 className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E6EE] hover:border-[#1F216B] transition-all flex items-center justify-between group cursor-pointer"
               >
                 <div className="flex items-center gap-3.5">
@@ -127,7 +152,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                   </div>
                   <div>
                     <span className="text-xs font-bold text-[#0F172A] block">Call Helpdesk</span>
-                    <span className="text-xs text-[#555D75]">+91 98765 43210 / 11</span>
+                    <span className="text-xs text-[#555D75]">+91 94212 15055</span>
                   </div>
                 </div>
                 <span className="text-xs font-bold text-[#1F216B] group-hover:underline">
@@ -146,7 +171,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                 <div className="flex items-start gap-2.5">
                   <MapPin className="w-4 h-4 text-[#D2AC65] flex-shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-[#0F172A]">Doorstep Coverage:</strong> Biometric verification across Bengaluru, Karnataka &amp; Delhi NCR.
+                    <strong className="text-[#0F172A]">Doorstep Coverage:</strong> Service available across Maharashtra with biometric verification across India and worldwide.
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5">
@@ -165,7 +190,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
           <div className="lg:col-span-7">
             <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#E2E6EE] shadow-xs relative">
               <AnimatePresence mode="wait">
-                {submitted ? (
+                {isSuccess ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -180,12 +205,12 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                       Inquiry Received Successfully!
                     </h3>
                     <p className="text-sm text-[#555D75] max-w-md mx-auto mb-6">
-                      Thank you for choosing <strong className="text-[#1F216B]">Go Prime Services</strong>. Our documentation officer will contact you at <strong className="text-[#1F216B]">{formData.phone}</strong> shortly.
+                      Thank you for choosing <strong className="text-[#1F216B]">Go Prime Services</strong>. Our documentation officer will contact you at <strong className="text-[#1F216B]">{formData.phone || "your number"}</strong> shortly.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
                       <a
-                        href={`https://wa.me/919876543210?text=${whatsappMessage}`}
+                        href={`https://wa.me/919421215055?text=${whatsappMessage}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-xs text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm transition-all"
@@ -195,7 +220,18 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                       </a>
 
                       <button
-                        onClick={() => setSubmitted(false)}
+                        suppressHydrationWarning
+                        onClick={() => {
+                          setLocalSubmitted(false);
+                          setFormData({
+                            name: "",
+                            phone: "",
+                            email: "",
+                            service: selectedServicePreset || "Rental Agreement",
+                            preferredSlot: "Morning (10:00 AM - 1:00 PM)",
+                            message: "",
+                          });
+                        }}
                         className="px-6 py-3 rounded-full text-xs font-bold text-[#0F172A] bg-[#F8FAFC] border border-[#E2E6EE] hover:bg-white transition-colors cursor-pointer"
                       >
                         Submit Another Request
@@ -221,13 +257,15 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="name">
                           Full Name *
                         </label>
                         <input
+                          suppressHydrationWarning
+                          id="name"
+                          name="name"
                           type="text"
                           required
-                          placeholder="e.g. Ishika Kapoor"
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
@@ -235,15 +273,22 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="phone">
                           Phone / WhatsApp Number *
                         </label>
                         <input
+                          suppressHydrationWarning
+                          id="phone"
+                          name="phone"
                           type="tel"
+                          inputMode="numeric"
+                          maxLength={10}
                           required
-                          placeholder="+91 98765 43210"
                           value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          onChange={(e) => {
+                            const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
+                            setFormData({ ...formData, phone: digits });
+                          }}
                           className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
                         />
                       </div>
@@ -251,12 +296,14 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="email">
                           Email Address
                         </label>
                         <input
+                          suppressHydrationWarning
+                          id="email"
+                          name="email"
                           type="email"
-                          placeholder="ishika@example.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
@@ -264,29 +311,35 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="service">
                           Documentation Service *
                         </label>
                         <select
+                          suppressHydrationWarning
+                          id="service"
+                          name="service"
                           value={formData.service}
                           onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                           className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
                         >
-                          <option value="Rental Agreement">Rental Agreement (11 Months)</option>
-                          <option value="Lease Agreement">Lease Agreement (Long Term)</option>
-                          <option value="Affidavit & Notary">Affidavit &amp; Notary Services</option>
-                          <option value="Police Verification">Tenant Police Verification</option>
-                          <option value="Sale Deed Documentation">Sale Deed Documentation</option>
-                          <option value="Power of Attorney">Power of Attorney (PoA)</option>
+                          <option value="Registered Rent Agreement">Registered Rent Agreement</option>
+                          <option value="Notarized Rent Agreement">Notarized Rent Agreement</option>
+                          <option value="Partnership Deed Registration">Partnership Deed Registration</option>
+                          <option value="Court Marriage & Registered Marriage">Court Marriage &amp; Registered Marriage</option>
+                          <option value="Passport / PAN / Aadhaar Services">Passport / PAN / Aadhaar Services</option>
+                          <option value="Food License / Shop Act License">Food License / Shop Act License</option>
                         </select>
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="preferredSlot">
                         Preferred Biometric Verification Slot
                       </label>
                       <select
+                        suppressHydrationWarning
+                        id="preferredSlot"
+                        name="preferredSlot"
                         value={formData.preferredSlot}
                         onChange={(e) => setFormData({ ...formData, preferredSlot: e.target.value })}
                         className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
@@ -299,24 +352,28 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="message">
                         Additional Notes / Location (Optional)
                       </label>
                       <textarea
+                        suppressHydrationWarning
+                        id="message"
+                        name="message"
                         rows={3}
-                        placeholder="e.g. Need biometric verification at Whitefield for 11-month agreement..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl p-3.5 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
                       />
+                      {submitError && <p role="alert" className="text-xs text-red-600 mt-2">{submitError}</p>}
                     </div>
 
                     <button
+                      suppressHydrationWarning
                       type="submit"
-                      disabled={loading}
+                      disabled={submitting}
                       className="w-full py-4 rounded-full font-bold text-sm text-white bg-[#1F216B] hover:bg-[#14164F] shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                     >
-                      {loading ? (
+                      {submitting ? (
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                       ) : (
                         <>
@@ -327,7 +384,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                     </button>
 
                     <p className="text-center text-[11px] text-[#555D75] pt-1">
-                      🔒 Your data is protected. We strictly adhere to state government data security and privacy guidelines.
+                      Your data is protected and handled with strict confidentiality.
                     </p>
                   </motion.form>
                 )}

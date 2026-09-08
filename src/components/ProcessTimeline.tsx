@@ -15,38 +15,38 @@ export default function ProcessTimeline() {
   const steps = [
     {
       num: "01",
-      title: "Submit Details",
-      desc: "Share your information and documents.",
+      title: "Submit Your Details",
+      desc: "Share landlord, tenant, witness, property details, and required documents.",
       icon: UserCheck,
     },
     {
       num: "02",
-      title: "Draft Preparation",
-      desc: "We prepare and share the draft.",
+      title: "Agreement Drafting",
+      desc: "Our legal experts prepare your rent agreement and share it for approval.",
       icon: FileEdit,
     },
     {
       num: "03",
-      title: "Approval",
-      desc: "Review and approve the draft.",
+      title: "Online Confirmation",
+      desc: "After approval, we generate the final agreement and begin online registration.",
       icon: CheckCircle2,
     },
     {
       num: "04",
       title: "Doorstep Verification",
-      desc: "Biometric verification at your location.",
+      desc: "Our representative visits your preferred location for biometric verification.",
       icon: Fingerprint,
     },
     {
       num: "05",
       title: "Government Registration",
-      desc: "We register with the government.",
+      desc: "The agreement is submitted to the Government of Maharashtra Registration Department.",
       icon: Landmark,
     },
     {
       num: "06",
-      title: "Receive Document",
-      desc: "Get your registered document delivered.",
+      title: "Receive Your Agreement",
+      desc: "Get the digitally signed agreement by email and WhatsApp, with print copy on request.",
       icon: FileCheck2,
     },
   ];
@@ -67,7 +67,7 @@ export default function ProcessTimeline() {
             A Simple 6-Step Process
           </h2>
           <p className="mt-3 text-sm sm:text-base text-[#555D75]">
-            Experience complete peace of mind with our guided, doorstep-assisted legal workflow.
+            Getting your registered rent agreement is simple, convenient, and fully guided.
           </p>
         </div>
 

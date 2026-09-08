@@ -23,34 +23,34 @@ export default function ServicesSection({
     {
       id: "rental-agreement",
       title: "Registered Rent Agreement",
-      description: "Drafted with custom clauses, state e-stamp duty, and doorstep biometric registration.",
-      cta: "Draft Agreement",
+      description: "Legally register your rent agreement with quick processing and doorstep biometric verification.",
+      cta: "Register Agreement",
       icon: FileText,
       servicePreset: "Registered Rent Agreement",
     },
     {
       id: "lease-agreement",
-      title: "Commercial & Long-Term Lease",
-      description: "Tailored lease deeds with legal vetting, title compliance, and sub-registrar filing.",
-      cta: "Prepare Lease",
+      title: "Notarized Rent Agreement",
+      description: "Get a professionally drafted and notarized rent agreement for your rental needs.",
+      cta: "Get Notarized",
       icon: Building,
-      servicePreset: "Commercial & Long-Term Lease",
+      servicePreset: "Notarized Rent Agreement",
     },
     {
       id: "affidavit-notary",
-      title: "Notarised Affidavits & Declarations",
-      description: "PF claims, address declarations, name change, and gap certificates stamped by licensed notaries.",
-      cta: "Get Notarised",
+      title: "Partnership Deed Registration",
+      description: "Draft and register partnership deeds with complete legal documentation support.",
+      cta: "Start Deed",
       icon: ShieldCheck,
-      servicePreset: "Affidavit & Notary Services",
+      servicePreset: "Partnership Deed Registration",
     },
     {
       id: "renew-agreement",
-      title: "Quick Agreement Renewal",
-      description: "Extend your tenancy tenure with updated rent, terms, and auto-calculated stamp duty.",
-      cta: "Renew Tenancy",
+      title: "Court Marriage & Registered Marriage",
+      description: "End-to-end assistance for court marriage and marriage registration documentation.",
+      cta: "Get Assistance",
       icon: RotateCw,
-      servicePreset: "Renewal of Rent Agreement",
+      servicePreset: "Court Marriage & Registered Marriage",
     },
   ];
 
@@ -74,7 +74,7 @@ export default function ServicesSection({
 
           <div className="max-w-sm">
             <p className="text-sm sm:text-base text-[#555D75] leading-relaxed">
-              From drafting and e-stamping to doorstep biometric authentication and priority delivery — we manage every government formality.
+              From rent agreements and marriage registration to PAN, Aadhaar, passport, licenses, and land records, we bring government and private services to your doorstep.
             </p>
           </div>
         </div>
@@ -125,11 +125,12 @@ export default function ServicesSection({
         {/* View All Services Link */}
         <div className="mt-10 text-center">
           <button
+            suppressHydrationWarning
             onClick={onOpenAllServices}
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#1F216B] hover:text-[#D2AC65] transition-colors cursor-pointer"
           >
-            <span>Need Police Verification, Property Sale Deed, or Power of Attorney?</span>
-            <span className="underline">View all documentation services →</span>
+            <span>Need Passport, PAN, Aadhaar, Gazette, FSSAI, or Shop Act support?</span>
+            <span className="underline">View all services</span>
           </button>
         </div>
 

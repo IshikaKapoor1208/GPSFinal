@@ -9,19 +9,20 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Go Prime Services | Legal Docs. Zero Office Visits.",
+  title: "Go Prime Services | Registered Rent Agreement Services",
   description:
-    "Rental agreements, affidavits, notary services — prepared, registered, and delivered to your doorstep in 2–3 working days. Skip the queue with Go Prime Services.",
+    "Registered rent agreements and government services with quick support, easy documentation, and doorstep assistance across Maharashtra.",
   keywords: [
     "Go Prime Services",
     "Legal Documentation Services",
     "Registered Rent Agreement",
     "Doorstep Biometric Verification",
-    "Affidavit and Notary",
-    "Leave & License Agreement",
-    "Lease Agreement",
-    "Bengaluru Rent Agreement",
-    "Delhi Rent Agreement",
+    "Notarized Rent Agreement",
+    "Partnership Deed Registration",
+    "Court Marriage",
+    "Passport Renewal",
+    "PAN Aadhaar Linking",
+    "Maharashtra Rent Agreement",
   ],
   authors: [{ name: "Go Prime Services" }],
   icons: {
@@ -30,9 +31,9 @@ export const metadata: Metadata = {
     apple: "/logo/logo.png",
   },
   openGraph: {
-    title: "Go Prime Services | Legal Docs. Zero Office Visits.",
+    title: "Go Prime Services | Registered Rent Agreement Services",
     description:
-      "Rental agreements, affidavits, notary services — prepared, registered, and delivered to your doorstep in 2–3 working days.",
+      "Registered rent agreements and government services with quick support, easy documentation, and doorstep assistance across Maharashtra.",
     images: [
       {
         url: "/logo/logo.png",
@@ -50,12 +51,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light scroll-smooth">
+    <html lang="en" className="light scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/logo/logo.png" type="image/png" sizes="any" />
         <link rel="apple-touch-icon" href="/logo/logo.png" />
       </head>
-      <body className="min-h-screen bg-[#F8FAFC] text-[#0F172A] font-sans antialiased selection:bg-[#1F216B] selection:text-white">
+      <body className="min-h-screen bg-[#F8FAFC] text-[#0F172A] font-sans antialiased selection:bg-[#1F216B] selection:text-white" suppressHydrationWarning>
         {children}
       </body>
     </html>

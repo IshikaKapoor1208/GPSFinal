@@ -18,7 +18,7 @@ export default function FaqSection() {
     },
     {
       q: "What is the turnaround time for doorstep delivery?",
-      a: "Drafts are generated and sent for your approval within 2 to 4 hours. Once approved and biometric verification is completed, your legally registered, stamped hard copy is couriered to your doorstep in 2–3 working days across Bengaluru, Karnataka, and Delhi NCR.",
+      a: "After you approve the draft and complete biometric verification, the digitally signed registered rent agreement is delivered to your email and WhatsApp. A printed copy can also be provided upon request.",
     },
     {
       q: "What documents are required from landlord and tenant?",
@@ -72,6 +72,7 @@ export default function FaqSection() {
                 }`}
               >
                 <button
+                  suppressHydrationWarning
                   onClick={() => toggleFaq(index)}
                   className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
                   aria-expanded={isOpen}
@@ -119,7 +120,7 @@ export default function FaqSection() {
             </p>
           </div>
           <a
-            href="https://wa.me/919876543210?text=Hi%20Go%20Prime%20Services,%20I%20have%20a%20question%20regarding%20legal%20documentation"
+            href="https://wa.me/919421215055?text=Hi%20Go%20Prime%20Services,%20I%20have%20a%20question%20regarding%20legal%20documentation"
             target="_blank"
             rel="noopener noreferrer"
             className="px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold shadow-xs flex items-center gap-2 whitespace-nowrap transition-all"

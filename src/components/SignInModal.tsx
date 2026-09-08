@@ -71,6 +71,7 @@ export default function SignInModal({
         >
           {/* Close Button */}
           <button
+            suppressHydrationWarning
             onClick={onClose}
             className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] hover:bg-[#1F216B] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Close sign in modal"
@@ -102,6 +103,7 @@ export default function SignInModal({
                 Logged in as +91 {phoneNumber}
               </p>
               <button
+                suppressHydrationWarning
                 onClick={onClose}
                 className="w-full py-3 rounded-full font-bold text-xs text-white bg-[#1F216B] hover:bg-[#14164F] shadow-sm transition-all"
               >
@@ -109,7 +111,7 @@ export default function SignInModal({
               </button>
             </div>
           ) : !otpSent ? (
-            <form onSubmit={handleSendOtp} className="space-y-4">
+            <form suppressHydrationWarning onSubmit={handleSendOtp} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
                   Mobile Number *
@@ -119,6 +121,7 @@ export default function SignInModal({
                     +91
                   </span>
                   <input
+                    suppressHydrationWarning
                     type="tel"
                     required
                     placeholder="98765 43210"
@@ -130,6 +133,7 @@ export default function SignInModal({
               </div>
 
               <button
+                suppressHydrationWarning
                 type="submit"
                 disabled={loading}
                 className="w-full py-3.5 rounded-full font-bold text-sm text-white bg-[#1F216B] hover:bg-[#14164F] shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
@@ -139,6 +143,7 @@ export default function SignInModal({
 
               <div className="pt-2 text-center">
                 <button
+                  suppressHydrationWarning
                   type="button"
                   onClick={() => {
                     onClose();
@@ -151,12 +156,13 @@ export default function SignInModal({
               </div>
             </form>
           ) : (
-            <form onSubmit={handleVerifyOtp} className="space-y-4">
+            <form suppressHydrationWarning onSubmit={handleVerifyOtp} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
                   Enter OTP *
                 </label>
                 <input
+                  suppressHydrationWarning
                   type="text"
                   maxLength={6}
                   required
@@ -168,6 +174,7 @@ export default function SignInModal({
               </div>
 
               <button
+                suppressHydrationWarning
                 type="submit"
                 disabled={loading}
                 className="w-full py-3.5 rounded-full font-bold text-sm text-white bg-[#1F216B] hover:bg-[#14164F] shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
@@ -177,6 +184,7 @@ export default function SignInModal({
 
               <div className="flex justify-between text-xs text-[#555D75]">
                 <button
+                  suppressHydrationWarning
                   type="button"
                   onClick={() => setOtpSent(false)}
                   className="hover:underline cursor-pointer"
@@ -184,6 +192,7 @@ export default function SignInModal({
                   Change number
                 </button>
                 <button
+                  suppressHydrationWarning
                   type="button"
                   onClick={handleSendOtp}
                   className="text-[#1F216B] font-bold hover:underline cursor-pointer"

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { submitLead } from "@/lib/api";
 import {
   X,
   FileCheck2,
@@ -28,10 +29,12 @@ export default function DocumentWizardModal({
   onClose,
   defaultService = "Rental Agreement",
 }: DocumentWizardModalProps) {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     serviceType: defaultService,
-    city: "Bengaluru",
+    city: "Maharashtra",
     landlordName: "",
     tenantName: "",
     phone: "",
@@ -42,19 +45,42 @@ export default function DocumentWizardModal({
     verificationMode: "Doorstep Biometric (UIDAI)",
     locality: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [referenceId, setReferenceId] = useState("");
+
+  const isSuccess = isSubmitted;
 
   const handleNext = () => setStep((prev) => Math.min(prev + 1, 3));
   const handlePrev = () => setStep((prev) => Math.max(prev - 1, 1));
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+  const onSubmitForm = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitError("");
+
+    const cleanedPhone = formData.phone.replace(/\D/g, "");
+    if (cleanedPhone.length !== 10) {
+      setSubmitError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    if (formData.email.trim()) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!formData.email.includes("@") || !emailPattern.test(formData.email.trim())) {
+        setSubmitError("Please enter a valid email address with '@' (e.g. yourname@gmail.com).");
+        return;
+      }
+    }
+
+    setSubmitting(true);
+    try {
+      const result = await submitLead("/api/v1/document-bookings", { ...formData, phone: cleanedPhone });
+      setReferenceId(result.referenceId);
       setIsSubmitted(true);
-    }, 600);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Unable to submit your booking. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -91,6 +117,7 @@ export default function DocumentWizardModal({
         >
           {/* Close Button */}
           <button
+            suppressHydrationWarning
             onClick={onClose}
             className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] hover:bg-[#1F216B] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Close document wizard"
@@ -98,7 +125,7 @@ export default function DocumentWizardModal({
             <X className="w-4 h-4" />
           </button>
 
-          {isSubmitted ? (
+          {isSuccess ? (
             /* Submission Success Screen */
             <div className="text-center py-8">
               <Logo size="sm" className="justify-center mb-6" />
@@ -110,7 +137,7 @@ export default function DocumentWizardModal({
                 Order Received Successfully!
               </h3>
               <p className="text-sm text-[#555D75] max-w-md mx-auto mb-6">
-                Thank you for choosing <strong className="text-[#1F216B]">Go Prime Services</strong>. Your reference ID is <span className="font-mono font-bold text-[#1F216B]">#GP-{Math.floor(1000 + Math.random() * 9000)}</span>. Our legal desk executive will call you at <strong className="text-[#1F216B]">{formData.phone}</strong> to confirm the draft.
+                Thank you for choosing <strong className="text-[#1F216B]">Go Prime Services</strong>. Your reference ID is <span className="font-mono font-bold text-[#1F216B]">#GP-{referenceId || "8942"}</span>. Our legal desk executive will call you at <strong className="text-[#1F216B]">{formData.phone || "your phone number"}</strong> to confirm the draft.
               </p>
 
               <div className="bg-white p-4 rounded-2xl border border-[#E2E6EE] max-w-md mx-auto mb-6 text-left text-xs space-y-2">
@@ -130,7 +157,7 @@ export default function DocumentWizardModal({
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
-                  href={`https://wa.me/919876543210?text=${whatsappMessage}`}
+                  href={`https://wa.me/919421215055?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-xs sm:text-sm text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm transition-all"
@@ -139,6 +166,7 @@ export default function DocumentWizardModal({
                   <span>Chat with Legal Desk on WhatsApp</span>
                 </a>
                 <button
+                  suppressHydrationWarning
                   onClick={handleReset}
                   className="px-6 py-3 rounded-full font-bold text-xs sm:text-sm text-[#0F172A] bg-white border border-[#E2E6EE] hover:bg-[#F8FAFC] transition-all cursor-pointer"
                 >
@@ -167,7 +195,7 @@ export default function DocumentWizardModal({
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit}>
+              <form suppressHydrationWarning onSubmit={onSubmitForm}>
                 {/* STEP 1 */}
                 {step === 1 && (
                   <motion.div
@@ -185,52 +213,61 @@ export default function DocumentWizardModal({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="serviceType">
                         Document Type *
                       </label>
                       <select
+                        suppressHydrationWarning
+                        id="serviceType"
+                        name="serviceType"
                         value={formData.serviceType}
                         onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
                         className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
                       >
-                        <option value="Rental Agreement">Rental Agreement (11 Months)</option>
-                        <option value="Lease Agreement">Lease Agreement (Long Term)</option>
-                        <option value="Affidavit & Notary">Affidavit &amp; Notary (PF, LPG, Name Change)</option>
-                        <option value="Renew Rental Agreement">Renew Rental Agreement</option>
-                        <option value="Police Verification">Tenant Police Verification</option>
-                        <option value="Sale Deed & PoA">Sale Deed / Power of Attorney</option>
+                        <option value="Registered Rent Agreement">Registered Rent Agreement</option>
+                        <option value="Notarized Rent Agreement">Notarized Rent Agreement</option>
+                        <option value="Partnership Deed Registration">Partnership Deed Registration</option>
+                        <option value="Court Marriage & Registered Marriage">Court Marriage &amp; Registered Marriage</option>
+                        <option value="Passport / PAN / Aadhaar Services">Passport / PAN / Aadhaar Services</option>
+                        <option value="Food License / Shop Act License">Food License / Shop Act License</option>
                       </select>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="city">
                           City / State *
                         </label>
                         <div className="relative">
                           <MapPin className="w-4 h-4 text-[#828DA4] absolute left-3.5 top-3.5" />
                           <select
+                            suppressHydrationWarning
+                            id="city"
+                            name="city"
                             value={formData.city}
                             onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                             className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
                           >
-                            <option value="Bengaluru">Bengaluru (Karnataka)</option>
-                            <option value="Delhi NCR">Delhi NCR</option>
+                            <option value="Maharashtra">Maharashtra</option>
                             <option value="Mumbai">Mumbai (Maharashtra)</option>
                             <option value="Pune">Pune (Maharashtra)</option>
-                            <option value="Hyderabad">Hyderabad (Telangana)</option>
-                            <option value="Chennai">Chennai (Tamil Nadu)</option>
+                            <option value="Nashik">Nashik (Maharashtra)</option>
+                            <option value="Nagpur">Nagpur (Maharashtra)</option>
+                            <option value="Across India">Across India</option>
+                            <option value="Worldwide">Worldwide</option>
                           </select>
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="locality">
                           Locality / Suburb (Optional)
                         </label>
                         <input
+                          suppressHydrationWarning
+                          id="locality"
+                          name="locality"
                           type="text"
-                          placeholder="e.g. Indiranagar, Whitefield, Dwarka..."
                           value={formData.locality}
                           onChange={(e) => setFormData({ ...formData, locality: e.target.value })}
                           className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
@@ -258,14 +295,16 @@ export default function DocumentWizardModal({
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="landlordName">
                           Landlord / Owner Name
                         </label>
                         <div className="relative">
                           <User className="w-4 h-4 text-[#828DA4] absolute left-3.5 top-3.5" />
                           <input
+                            suppressHydrationWarning
+                            id="landlordName"
+                            name="landlordName"
                             type="text"
-                            placeholder="e.g. Rajesh Kumar"
                             value={formData.landlordName}
                             onChange={(e) => setFormData({ ...formData, landlordName: e.target.value })}
                             className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none"
@@ -274,14 +313,16 @@ export default function DocumentWizardModal({
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="tenantName">
                           Tenant / Applicant Name
                         </label>
                         <div className="relative">
                           <User className="w-4 h-4 text-[#828DA4] absolute left-3.5 top-3.5" />
                           <input
+                            suppressHydrationWarning
+                            id="tenantName"
+                            name="tenantName"
                             type="text"
-                            placeholder="e.g. Ishika Kapoor"
                             value={formData.tenantName}
                             onChange={(e) => setFormData({ ...formData, tenantName: e.target.value })}
                             className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none"
@@ -292,12 +333,14 @@ export default function DocumentWizardModal({
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="monthlyRent">
                           Monthly Rent (₹)
                         </label>
                         <input
+                          suppressHydrationWarning
+                          id="monthlyRent"
+                          name="monthlyRent"
                           type="number"
-                          placeholder="25000"
                           value={formData.monthlyRent}
                           onChange={(e) => setFormData({ ...formData, monthlyRent: e.target.value })}
                           className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none"
@@ -305,12 +348,14 @@ export default function DocumentWizardModal({
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="securityDeposit">
                           Security Deposit (₹)
                         </label>
                         <input
+                          suppressHydrationWarning
+                          id="securityDeposit"
+                          name="securityDeposit"
                           type="number"
-                          placeholder="100000"
                           value={formData.securityDeposit}
                           onChange={(e) => setFormData({ ...formData, securityDeposit: e.target.value })}
                           className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none"
@@ -338,29 +383,38 @@ export default function DocumentWizardModal({
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="wiz-phone">
                           Phone / WhatsApp Number *
                         </label>
                         <div className="relative">
                           <Phone className="w-4 h-4 text-[#828DA4] absolute left-3.5 top-3.5" />
                           <input
+                            suppressHydrationWarning
+                            id="wiz-phone"
+                            name="phone"
                             type="tel"
+                            inputMode="numeric"
+                            maxLength={10}
                             required
-                            placeholder="+91 98765 43210"
                             value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            onChange={(e) => {
+                              const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
+                              setFormData({ ...formData, phone: digits });
+                            }}
                             className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="wiz-email">
                           Email Address
                         </label>
                         <input
+                          suppressHydrationWarning
+                          id="wiz-email"
+                          name="email"
                           type="email"
-                          placeholder="ishika@example.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none"
@@ -369,10 +423,13 @@ export default function DocumentWizardModal({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="verificationMode">
                         Verification Mode
                       </label>
                       <select
+                        suppressHydrationWarning
+                        id="verificationMode"
+                        name="verificationMode"
                         value={formData.verificationMode}
                         onChange={(e) => setFormData({ ...formData, verificationMode: e.target.value })}
                         className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none cursor-pointer"
@@ -381,6 +438,7 @@ export default function DocumentWizardModal({
                         <option value="Aadhaar E-Sign (Paperless)">Aadhaar OTP / E-Sign (100% Online)</option>
                         <option value="Notary & Hardcopy Courier">Physical Notary Stamp &amp; Speed Courier Delivery</option>
                       </select>
+                      {submitError && <p role="alert" className="text-xs text-red-600 mt-2">{submitError}</p>}
                     </div>
 
                     <div className="p-3.5 rounded-2xl bg-[#EEF2FB] border border-[#CCD6F0] text-xs text-[#1F216B] flex items-center gap-2">
@@ -394,6 +452,7 @@ export default function DocumentWizardModal({
                 <div className="mt-8 pt-4 border-t border-[#E2E6EE] flex items-center justify-between gap-3">
                   {step > 1 ? (
                     <button
+                      suppressHydrationWarning
                       type="button"
                       onClick={handlePrev}
                       className="px-5 py-3 rounded-full border border-[#E2E6EE] text-xs font-bold text-[#0F172A] hover:bg-white flex items-center gap-1.5 cursor-pointer"
@@ -407,6 +466,7 @@ export default function DocumentWizardModal({
 
                   {step < 3 ? (
                     <button
+                      suppressHydrationWarning
                       type="button"
                       onClick={handleNext}
                       className="px-7 py-3 rounded-full bg-[#1F216B] hover:bg-[#14164F] text-white text-xs sm:text-sm font-bold shadow-md flex items-center gap-2 cursor-pointer"
@@ -416,11 +476,12 @@ export default function DocumentWizardModal({
                     </button>
                   ) : (
                     <button
+                      suppressHydrationWarning
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={submitting}
                       className="px-7 py-3 rounded-full bg-[#1F216B] hover:bg-[#14164F] text-white text-xs sm:text-sm font-bold shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
                     >
-                      {isSubmitting ? (
+                      {submitting ? (
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                       ) : (
                         <>

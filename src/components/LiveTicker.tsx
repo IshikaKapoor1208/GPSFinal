@@ -4,16 +4,16 @@ import React from "react";
 
 export default function LiveTicker() {
   const activities = [
-    { text: "Registered Tenancy Agreement delivered in", location: "Whitefield" },
-    { text: "Doorstep Biometric verification completed in", location: "Indiranagar" },
-    { text: "E-Stamp Duty processed & sealed for", location: "Koramangala" },
-    { text: "Notarised Affidavit dispatched to", location: "Jayanagar" },
-    { text: "Commercial Lease Deed executed in", location: "HSR Layout" },
-    { text: "Leave & License registered with sub-registrar in", location: "Electronic City" },
-    { text: "Property Document authenticated in", location: "Bellandur" },
-    { text: "Rental Agreement renewal completed in", location: "JP Nagar" },
-    { text: "Sworn Declaration notarised in", location: "Connaught Place, Delhi" },
-    { text: "Corporate Tenancy Deed delivered in", location: "Cyber City, Gurgaon" },
+    { text: "Registered Rent Agreement completed in", location: "Pune" },
+    { text: "Doorstep biometric verification arranged in", location: "Mumbai" },
+    { text: "Notarized Rent Agreement prepared for", location: "Nashik" },
+    { text: "Partnership Deed Registration support provided in", location: "Nagpur" },
+    { text: "Court Marriage documentation assisted in", location: "Thane" },
+    { text: "Passport renewal guidance completed for", location: "Kolhapur" },
+    { text: "PAN-Aadhaar linking support provided in", location: "Aurangabad" },
+    { text: "Digital 7/12 and 8A documents requested from", location: "Satara" },
+    { text: "FSSAI Food License assistance started in", location: "Solapur" },
+    { text: "Shop Act License documentation submitted in", location: "Maharashtra" },
   ];
 
   // Repeat for continuous infinite scroll

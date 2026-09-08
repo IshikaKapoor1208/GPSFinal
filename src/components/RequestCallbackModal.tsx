@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { submitLead } from "@/lib/api";
 import {
   X,
   Phone,
@@ -24,6 +25,8 @@ export default function RequestCallbackModal({
   onClose,
   defaultService = "Rental Agreement",
 }: RequestCallbackModalProps) {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -31,17 +34,29 @@ export default function RequestCallbackModal({
     preferredTime: "Next 15 minutes",
     notes: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const isSuccess = isSubmitted;
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitError("");
+
+    const cleanedPhone = formData.phone.replace(/\D/g, "");
+    if (cleanedPhone.length !== 10) {
+      setSubmitError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      await submitLead("/api/v1/callback-requests", { ...formData, phone: cleanedPhone });
       setIsSubmitted(true);
-    }, 600);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Unable to request a callback. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -83,6 +98,7 @@ export default function RequestCallbackModal({
           >
             {/* Close Button */}
             <button
+              suppressHydrationWarning
               onClick={onClose}
               className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] hover:bg-[#1F216B] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
               aria-label="Close modal"
@@ -90,7 +106,7 @@ export default function RequestCallbackModal({
               <X className="w-4 h-4" />
             </button>
 
-            {isSubmitted ? (
+            {isSuccess ? (
               <div className="text-center py-8">
                 <div className="w-16 h-16 rounded-2xl bg-[#1F216B] text-white flex items-center justify-center mx-auto mb-5 shadow-md">
                   <CheckCircle2 className="w-9 h-9 text-emerald-400" />
@@ -99,14 +115,14 @@ export default function RequestCallbackModal({
                   Callback Request Submitted!
                 </h3>
                 <p className="text-sm text-[#555D75] mb-6 max-w-sm mx-auto">
-                  Thank you, <strong className="text-[#1F216B]">{formData.name}</strong>. Our legal documentation specialist will call you at{" "}
-                  <strong className="text-[#1F216B]">{formData.phone}</strong> around{" "}
+                  Thank you, <strong className="text-[#1F216B]">{formData.name || "Customer"}</strong>. Our legal documentation specialist will call you at{" "}
+                  <strong className="text-[#1F216B]">{formData.phone || "your number"}</strong> around{" "}
                   <span className="text-[#2B2E8F] font-bold">{formData.preferredTime}</span>.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <a
-                    href={`https://wa.me/919876543210?text=${whatsappMessage}`}
+                    href={`https://wa.me/919421215055?text=${whatsappMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-xs text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm transition-all"
@@ -115,6 +131,7 @@ export default function RequestCallbackModal({
                     <span>Chat on WhatsApp Now</span>
                   </a>
                   <button
+                    suppressHydrationWarning
                     onClick={handleReset}
                     className="px-6 py-3 rounded-full font-bold text-xs text-[#0F172A] bg-white border border-[#E2E6EE] hover:bg-[#F8FAFC] transition-all cursor-pointer"
                   >
@@ -140,18 +157,20 @@ export default function RequestCallbackModal({
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form suppressHydrationWarning onSubmit={handleSubmit} className="space-y-4">
                   {/* Name Field */}
                   <div>
-                    <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="cb-name">
                       Your Full Name *
                     </label>
                     <div className="relative">
                       <User className="w-4 h-4 text-[#828DA4] absolute left-3.5 top-3.5" />
                       <input
+                        suppressHydrationWarning
+                        id="cb-name"
+                        name="name"
                         type="text"
                         required
-                        placeholder="e.g. Ishika Kapoor"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] focus:ring-1 focus:ring-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
@@ -161,17 +180,24 @@ export default function RequestCallbackModal({
 
                   {/* Phone Field */}
                   <div>
-                    <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="cb-phone">
                       Phone / WhatsApp Number *
                     </label>
                     <div className="relative">
                       <Phone className="w-4 h-4 text-[#828DA4] absolute left-3.5 top-3.5" />
                       <input
+                        suppressHydrationWarning
+                        id="cb-phone"
+                        name="phone"
                         type="tel"
+                        inputMode="numeric"
+                        maxLength={10}
                         required
-                        placeholder="+91 98765 43210"
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        onChange={(e) => {
+                          const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
+                          setFormData({ ...formData, phone: digits });
+                        }}
                         className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] focus:ring-1 focus:ring-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
                       />
                     </div>
@@ -180,32 +206,38 @@ export default function RequestCallbackModal({
                   {/* Service Selection */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="cb-service">
                         Required Service
                       </label>
                       <div className="relative">
                         <FileText className="w-4 h-4 text-[#828DA4] absolute left-3.5 top-3.5" />
                         <select
+                          suppressHydrationWarning
+                          id="cb-service"
+                          name="service"
                           value={formData.service}
                           onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                           className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-xs sm:text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
                         >
                           <option value="Rental Agreement">Rental Agreement</option>
-                          <option value="Lease Agreement">Lease Agreement</option>
-                          <option value="Affidavit & Notary">Affidavit &amp; Notary</option>
-                          <option value="Police Verification">Police Verification</option>
-                          <option value="Sale Deed & PoA">Sale Deed &amp; PoA</option>
+                          <option value="Notarized Rent Agreement">Notarized Rent Agreement</option>
+                          <option value="Partnership Deed Registration">Partnership Deed Registration</option>
+                          <option value="Court Marriage & Registered Marriage">Court Marriage &amp; Registered Marriage</option>
+                          <option value="Passport / PAN / Aadhaar Services">Passport / PAN / Aadhaar Services</option>
                         </select>
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5" htmlFor="cb-time">
                         Preferred Time
                       </label>
                       <div className="relative">
                         <Clock className="w-4 h-4 text-[#828DA4] absolute left-3.5 top-3.5" />
                         <select
+                          suppressHydrationWarning
+                          id="cb-time"
+                          name="preferredTime"
                           value={formData.preferredTime}
                           onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
                           className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-xs sm:text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
@@ -217,16 +249,18 @@ export default function RequestCallbackModal({
                           <option value="Tomorrow (Morning)">Tomorrow (Morning)</option>
                         </select>
                       </div>
+                      {submitError && <p role="alert" className="text-xs text-red-600 mt-2">{submitError}</p>}
                     </div>
                   </div>
 
                   {/* Submit Button */}
                   <button
+                    suppressHydrationWarning
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={submitting}
                     className="w-full mt-2 py-3.5 rounded-full font-bold text-sm text-white bg-[#1F216B] hover:bg-[#14164F] shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
-                    {isSubmitting ? (
+                    {submitting ? (
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     ) : (
                       <>
@@ -240,7 +274,7 @@ export default function RequestCallbackModal({
                     <p className="text-[11px] text-[#555D75]">
                       Prefer WhatsApp?{" "}
                       <a
-                        href="https://wa.me/919876543210?text=Hi%20Go%20Prime%20Services,%20I%20need%20assistance%20with%20legal%20documentation"
+                        href="https://wa.me/919421215055?text=Hi%20Go%20Prime%20Services,%20I%20need%20assistance%20with%20legal%20documentation"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-[#1F216B] font-bold underline hover:text-[#D2AC65]"

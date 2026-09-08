@@ -72,6 +72,7 @@ export default function TrackOrderModal({
         >
           {/* Close Button */}
           <button
+            suppressHydrationWarning
             onClick={onClose}
             className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] hover:bg-[#1F216B] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Close track order modal"
@@ -97,10 +98,11 @@ export default function TrackOrderModal({
           </div>
 
           {/* Search Input Form */}
-          <form onSubmit={handleTrack} className="mb-6">
+          <form suppressHydrationWarning onSubmit={handleTrack} className="mb-6">
             <div className="flex gap-2">
               <div className="relative flex-1">
                 <input
+                  suppressHydrationWarning
                   type="text"
                   required
                   placeholder="e.g. 9876543210 or GP-8942"
@@ -110,6 +112,7 @@ export default function TrackOrderModal({
                 />
               </div>
               <button
+                suppressHydrationWarning
                 type="submit"
                 disabled={isSearching}
                 className="px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm text-white bg-[#1F216B] hover:bg-[#14164F] shadow-sm transition-all cursor-pointer disabled:opacity-50"
@@ -188,7 +191,7 @@ export default function TrackOrderModal({
                 💡 Tip: You can also track updates instantly by messaging our team on WhatsApp with your name and address.
               </p>
               <a
-                href="https://wa.me/919876543210?text=Hi%20Go%20Prime%20Services,%20I%20would%20like%20to%20track%20my%20document%20order"
+                href="https://wa.me/919421215055?text=Hi%20Go%20Prime%20Services,%20I%20would%20like%20to%20track%20my%20document%20order"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#1F216B] hover:text-[#D2AC65] underline"

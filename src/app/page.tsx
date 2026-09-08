@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroCutoutZoom from "@/components/HeroCutoutZoom";
 import LiveTicker from "@/components/LiveTicker";
@@ -31,6 +31,25 @@ export default function Home() {
   const [allServicesModalOpen, setAllServicesModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("Rental Agreement");
   const [isZoomedIn, setIsZoomedIn] = useState(false);
+
+  useEffect(() => {
+    const handleAnchorClick = (event: MouseEvent) => {
+      const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href^="#"]');
+      const hash = link?.getAttribute("href");
+
+      if (!hash || hash === "#") return;
+
+      const target = document.querySelector(hash);
+      if (!target) return;
+
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState(null, "", hash);
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+    return () => document.removeEventListener("click", handleAnchorClick);
+  }, []);
 
   const handleStartAgreement = (serviceName?: string) => {
     if (serviceName) {
@@ -75,6 +94,7 @@ export default function Home() {
         onOpenAllServices={handleOpenAllServices}
         onOpenTrackOrder={() => setTrackOrderModalOpen(true)}
         onOpenSignIn={() => setSignInModalOpen(true)}
+        onOpenCallback={() => handleOpenCallback()}
       />
 
       {/* Main Page Flow */}
@@ -122,8 +142,8 @@ export default function Home() {
       {/* Floating WhatsApp & Direct Contact Widget - Hidden on initial screen, reveals on zoom */}
       <WhatsAppFloatingWidget
         visible={isZoomedIn}
-        phoneNumber="919876543210"
-        emailAddress="contact@goprimeservices.com"
+        phoneNumber="919421215055"
+        emailAddress="contactgoprimeservices@gmail.com"
       />
 
       {/* Interactive High-Res Document & Process Video Inspector Modal */}

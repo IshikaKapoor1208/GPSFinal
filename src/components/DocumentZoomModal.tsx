@@ -93,6 +93,7 @@ export default function DocumentZoomModal({
             {/* Middle: Tab Selector */}
             <div className="bg-[#F1F5F9] p-1 rounded-full border border-[#E2E8F0] flex items-center gap-1">
               <button
+                suppressHydrationWarning
                 onClick={() => setActiveTab("video")}
                 className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   activeTab === "video"
@@ -105,6 +106,7 @@ export default function DocumentZoomModal({
               </button>
 
               <button
+                suppressHydrationWarning
                 onClick={() => setActiveTab("document")}
                 className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   activeTab === "document"
@@ -122,6 +124,7 @@ export default function DocumentZoomModal({
               {activeTab === "document" && (
                 <div className="hidden sm:flex items-center bg-[#F8FAFC] border border-[#E2E6EE] rounded-full p-1 gap-1">
                   <button
+                    suppressHydrationWarning
                     onClick={handleZoomOut}
                     disabled={zoomLevel <= 0.8}
                     className="p-1.5 rounded-full hover:bg-white text-[#0F172A] disabled:opacity-30 cursor-pointer transition-colors"
@@ -133,6 +136,7 @@ export default function DocumentZoomModal({
                     {Math.round(zoomLevel * 100)}%
                   </span>
                   <button
+                    suppressHydrationWarning
                     onClick={handleZoomIn}
                     disabled={zoomLevel >= 2.0}
                     className="p-1.5 rounded-full hover:bg-white text-[#0F172A] disabled:opacity-30 cursor-pointer transition-colors"
@@ -141,6 +145,7 @@ export default function DocumentZoomModal({
                     <ZoomIn className="w-4 h-4" />
                   </button>
                   <button
+                    suppressHydrationWarning
                     onClick={handleResetZoom}
                     className="p-1.5 rounded-full hover:bg-white text-[#555D75] hover:text-[#1F216B] cursor-pointer transition-colors"
                     title="Reset Zoom"
@@ -152,6 +157,7 @@ export default function DocumentZoomModal({
 
               {/* Close Modal Button */}
               <button
+                suppressHydrationWarning
                 onClick={onClose}
                 className="w-9 h-9 rounded-full bg-[#F8FAFC] hover:bg-[#1F216B] hover:text-white border border-[#E2E6EE] text-[#0F172A] flex items-center justify-center transition-colors cursor-pointer"
                 aria-label="Close modal"
@@ -173,6 +179,7 @@ export default function DocumentZoomModal({
                 <div className="grid grid-cols-3 gap-2">
                   {HERO_VIDEOS.map((vid, idx) => (
                     <button
+                      suppressHydrationWarning
                       key={vid.id}
                       onClick={() => setSelectedVideo(idx)}
                       className={`p-3 rounded-2xl border text-left transition-all cursor-pointer ${
@@ -215,6 +222,7 @@ export default function DocumentZoomModal({
 
                   {/* Audio Toggle in Video */}
                   <button
+                    suppressHydrationWarning
                     onClick={() => setModalVideoMuted(!modalVideoMuted)}
                     className="absolute top-4 right-4 z-10 px-3 py-1.5 rounded-full bg-black/70 hover:bg-black/90 backdrop-blur-md border border-white/20 text-white text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer"
                   >
@@ -413,12 +421,14 @@ export default function DocumentZoomModal({
 
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <button
+                suppressHydrationWarning
                 onClick={onClose}
                 className="px-5 py-2.5 rounded-full border border-[#E2E6EE] text-xs font-bold text-[#0F172A] hover:bg-[#F8FAFC] transition-colors cursor-pointer w-full sm:w-auto"
               >
                 Close Inspector
               </button>
               <button
+                suppressHydrationWarning
                 onClick={() => {
                   onClose();
                   if (onStartAgreement) onStartAgreement();

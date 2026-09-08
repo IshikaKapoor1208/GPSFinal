@@ -19,8 +19,8 @@ interface WhatsAppFloatingWidgetProps {
 }
 
 export default function WhatsAppFloatingWidget({
-  phoneNumber = "919876543210",
-  emailAddress = "contact@goprimeservices.com",
+  phoneNumber = "919421215055",
+  emailAddress = "contactgoprimeservices@gmail.com",
   visible = true,
 }: WhatsAppFloatingWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,8 +31,8 @@ export default function WhatsAppFloatingWidget({
   const quickOptions = [
     { label: "Rental Agreement (11 Months)", msg: "Hi Go Prime Services, I need help with Registered Rent Agreement registration." },
     { label: "Doorstep Biometric Verification", msg: "Hi, I would like to book a Doorstep Biometric Verification slot." },
-    { label: "Affidavit & Notary Services", msg: "Hello, I need assistance with Notary and Affidavit preparation." },
-    { label: "Tenant Police Verification", msg: "Hi, I want to inquire about Police Verification for my tenant." },
+    { label: "Notarized Rent Agreement", msg: "Hello, I need assistance with a Notarized Rent Agreement." },
+    { label: "Passport / PAN / Aadhaar Services", msg: "Hi, I need assistance with Passport, PAN, or Aadhaar services." },
   ];
 
   const handleOpenWhatsApp = (messageText: string) => {
@@ -83,6 +83,7 @@ export default function WhatsAppFloatingWidget({
                 </div>
 
                 <button
+                  suppressHydrationWarning
                   onClick={() => setIsOpen(false)}
                   className="p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
                   aria-label="Close WhatsApp widget"
@@ -114,6 +115,7 @@ export default function WhatsAppFloatingWidget({
                 </span>
                 {quickOptions.map((opt, i) => (
                   <button
+                    suppressHydrationWarning
                     key={i}
                     onClick={() => handleOpenWhatsApp(opt.msg)}
                     className="w-full text-left p-2.5 rounded-xl bg-white hover:bg-[#EEF2FB] border border-[#E2E6EE] hover:border-[#1F216B] text-xs font-semibold text-[#0F172A] transition-all flex items-center justify-between group cursor-pointer shadow-2xs"
@@ -127,6 +129,7 @@ export default function WhatsAppFloatingWidget({
               {/* Direct Email & Phone Channels */}
               <div className="pt-2 border-t border-[#E2E6EE] grid grid-cols-2 gap-2">
                 <button
+                  suppressHydrationWarning
                   onClick={handleCopyEmail}
                   className="p-2 rounded-xl bg-white hover:bg-slate-50 border border-[#E2E6EE] text-[11px] font-bold text-[#0F172A] flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                   title="Copy or Email"
@@ -145,7 +148,7 @@ export default function WhatsAppFloatingWidget({
                 </button>
 
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+919421215055"
                   className="p-2 rounded-xl bg-white hover:bg-slate-50 border border-[#E2E6EE] text-[11px] font-bold text-[#0F172A] flex items-center justify-center gap-1.5 transition-all"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#1F216B]" />
@@ -157,6 +160,7 @@ export default function WhatsAppFloatingWidget({
             {/* Custom Input Footer */}
             <div className="p-3 bg-white border-t border-[#E2E6EE] flex items-center gap-2">
               <input
+                suppressHydrationWarning
                 type="text"
                 placeholder="Type your message..."
                 value={customMsg}
@@ -169,6 +173,7 @@ export default function WhatsAppFloatingWidget({
                 className="flex-1 bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-xl px-3 py-2 text-xs text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none"
               />
               <button
+                suppressHydrationWarning
                 onClick={() => handleOpenWhatsApp(customMsg)}
                 className="p-2.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white shadow-sm transition-colors cursor-pointer"
                 aria-label="Send via WhatsApp"
@@ -195,6 +200,7 @@ export default function WhatsAppFloatingWidget({
           </span>
           <span>Chat with Legal Desk</span>
           <button
+            suppressHydrationWarning
             onClick={(e) => {
               e.stopPropagation();
               setShowTooltip(false);
@@ -210,6 +216,7 @@ export default function WhatsAppFloatingWidget({
       <div className="flex items-center gap-2.5">
         {/* Email Quick Action Pill */}
         <button
+          suppressHydrationWarning
           onClick={handleCopyEmail}
           className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E6EE] shadow-lg text-xs font-bold transition-all hover:scale-105 cursor-pointer"
           title={`Email: ${emailAddress}`}
@@ -229,6 +236,7 @@ export default function WhatsAppFloatingWidget({
 
         {/* WhatsApp Main Button */}
         <motion.button
+          suppressHydrationWarning
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsOpen(!isOpen)}

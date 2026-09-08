@@ -12,9 +12,6 @@ import {
   Shield,
   FileSignature,
   FileBadge,
-  PackageSearch,
-  HelpCircle,
-  LogIn,
 } from "lucide-react";
 import Logo from "@/components/Logo";
 
@@ -22,7 +19,8 @@ interface NavbarProps {
   onStartAgreement: () => void;
   onOpenAllServices: () => void;
   onOpenTrackOrder: () => void;
-  onOpenSignIn: () => void;
+  onOpenSignIn?: () => void;
+  onOpenCallback: () => void;
   visible?: boolean;
 }
 
@@ -31,18 +29,19 @@ export default function Navbar({
   onOpenAllServices,
   onOpenTrackOrder,
   onOpenSignIn,
+  onOpenCallback,
   visible = true,
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
-  const [signInDropdownOpen, setSignInDropdownOpen] = useState(false);
+
 
   const quickServices = [
     { name: "Registered Rent Agreement", href: "#services", icon: FileCheck },
-    { name: "Lease Agreement", href: "#services", icon: Home },
-    { name: "Affidavit & Notary Services", href: "#services", icon: Shield },
-    { name: "Police Verification", href: "#services", icon: FileSignature },
-    { name: "Sale Deed & PoA", href: "#services", icon: FileBadge },
+    { name: "Notarized Rent Agreement", href: "#services", icon: Home },
+    { name: "Partnership Deed Registration", href: "#services", icon: Shield },
+    { name: "Court Marriage & Registered Marriage", href: "#services", icon: FileSignature },
+    { name: "Passport, PAN & Aadhaar Services", href: "#services", icon: FileBadge },
   ];
 
   return (
@@ -65,6 +64,12 @@ export default function Navbar({
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-[#0F172A]">
+            <a
+              href="#home"
+              className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155]"
+            >
+              <span>Home</span>
+            </a>
             
             {/* Services with Dropdown */}
             <div
@@ -114,6 +119,7 @@ export default function Navbar({
 
                     <div className="pt-2 mt-1 border-t border-[#E2E6EE]">
                       <button
+                        suppressHydrationWarning
                         onClick={() => {
                           setServicesDropdownOpen(false);
                           onOpenAllServices();
@@ -129,85 +135,41 @@ export default function Navbar({
               </AnimatePresence>
             </div>
 
-            {/* How It Works */}
             <a
-              href="#how-it-works"
+              href="#careers"
               className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155]"
             >
-              <span>How it works</span>
+              <span>Careers</span>
             </a>
 
-            {/* Track Order */}
-            <button
-              onClick={onOpenTrackOrder}
-              className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155] flex items-center gap-1.5 cursor-pointer"
-            >
-              <PackageSearch className="w-3.5 h-3.5 text-[#64748B]" />
-              <span>Track order</span>
-            </button>
-
-            {/* FAQs */}
             <a
-              href="#faqs"
-              className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155] flex items-center gap-1.5"
+              href="#about"
+              className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155]"
             >
-              <span>FAQs</span>
+              <span>About Us</span>
             </a>
+
+            <a
+              href="#contact"
+              className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155]"
+            >
+              <span>Contact Us</span>
+            </a>
+
+            <button
+              suppressHydrationWarning
+              onClick={onOpenCallback}
+              className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155] cursor-pointer"
+            >
+              <span>Request Call Back Form</span>
+            </button>
           </nav>
 
-          {/* Right Header Actions: Sign In + Get Started Button */}
+          {/* Right Header Actions: Book Service Button */}
           <div className="hidden lg:flex items-center gap-4">
-            
-            {/* Sign In Dropdown Trigger */}
-            <div
-              className="relative"
-              onMouseEnter={() => setSignInDropdownOpen(true)}
-              onMouseLeave={() => setSignInDropdownOpen(false)}
-            >
-              <button
-                onClick={onOpenSignIn}
-                className="py-2 px-2 text-sm font-medium text-[#0F172A] hover:text-[#1F216B] flex items-center gap-1 cursor-pointer"
-              >
-                <span>Sign in</span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#64748B]" />
-              </button>
-
-              <AnimatePresence>
-                {signInDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute top-full right-0 mt-1 w-48 bg-white border border-[#E2E6EE] rounded-2xl shadow-xl p-2 z-50"
-                  >
-                    <button
-                      onClick={() => {
-                        setSignInDropdownOpen(false);
-                        onOpenSignIn();
-                      }}
-                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-[#0F172A] hover:bg-[#F8FAFC] flex items-center gap-2 cursor-pointer"
-                    >
-                      <LogIn className="w-3.5 h-3.5 text-[#1F216B]" />
-                      <span>Customer Sign In</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        setSignInDropdownOpen(false);
-                        onOpenTrackOrder();
-                      }}
-                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-[#0F172A] hover:bg-[#F8FAFC] flex items-center gap-2 cursor-pointer"
-                    >
-                      <PackageSearch className="w-3.5 h-3.5 text-[#D2AC65]" />
-                      <span>Track by Phone / Order</span>
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
             {/* Book Service Navy Pill Button */}
             <button
+              suppressHydrationWarning
               onClick={onStartAgreement}
               className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-[#1F216B] hover:bg-[#14164F] text-white text-sm font-semibold shadow-xs hover:shadow-md transition-all cursor-pointer group"
             >
@@ -219,6 +181,7 @@ export default function Navbar({
           {/* Mobile Hamburger Menu Toggle */}
           <div className="flex items-center gap-2 lg:hidden">
             <button
+              suppressHydrationWarning
               onClick={onStartAgreement}
               className="px-4 py-2 rounded-full bg-[#1F216B] text-white text-xs font-semibold"
             >
@@ -226,6 +189,7 @@ export default function Navbar({
             </button>
 
             <button
+              suppressHydrationWarning
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="w-10 h-10 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] flex items-center justify-center transition-colors cursor-pointer"
               aria-label="Toggle Navigation Menu"
@@ -263,43 +227,40 @@ export default function Navbar({
                 Services
               </a>
               <a
-                href="#how-it-works"
+                href="#careers"
                 onClick={() => setMobileMenuOpen(false)}
                 className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC]"
               >
-                How it works
+                Careers
+              </a>
+              <a
+                href="#about"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC]"
+              >
+                About Us
+              </a>
+              <a
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC]"
+              >
+                Contact Us
               </a>
               <button
+                suppressHydrationWarning
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenTrackOrder();
+                  onOpenCallback();
                 }}
                 className="w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC] flex items-center gap-2 cursor-pointer"
               >
-                <PackageSearch className="w-4 h-4 text-[#64748B]" />
-                <span>Track order</span>
+                <span>Request Call Back Form</span>
               </button>
-              <a
-                href="#faqs"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC]"
-              >
-                FAQs
-              </a>
 
               <div className="pt-3 mt-2 border-t border-[#E2E6EE] flex flex-col gap-2">
                 <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenSignIn();
-                  }}
-                  className="w-full py-3 rounded-full font-semibold text-sm text-[#0F172A] bg-[#F8FAFC] border border-[#E2E6EE] flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <LogIn className="w-4 h-4 text-[#1F216B]" />
-                  <span>Sign In</span>
-                </button>
-
-                <button
+                  suppressHydrationWarning
                   onClick={() => {
                     setMobileMenuOpen(false);
                     onStartAgreement();

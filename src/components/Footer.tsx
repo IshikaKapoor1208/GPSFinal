@@ -38,16 +38,16 @@ export default function Footer({
               Zero Office Visits Guaranteed
             </span>
             <h3 className="text-xl sm:text-2xl font-bold text-white">
-              Get Your Legal Document Registered &amp; Delivered in 2–3 Days
+              Complete Your Rent Agreement with Ease
             </h3>
             <p className="text-xs sm:text-sm text-white/70 mt-1 max-w-xl">
-              Doorstep biometric verification, verified e-stamp duty, and 100% legal validity.
+              Simple documentation, doorstep convenience, reliable service, and customer satisfaction.
             </p>
           </div>
 
           <div className="flex items-center gap-3 flex-wrap">
             <a
-              href="https://wa.me/919876543210?text=Hi%20Go%20Prime%20Services,%20I%20would%20like%20to%20register%20a%20legal%20document"
+              href="https://wa.me/919421215055?text=Hi%20Go%20Prime%20Services,%20I%20would%20like%20to%20register%20a%20legal%20document"
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm flex items-center gap-2 transition-all"
@@ -57,10 +57,11 @@ export default function Footer({
             </a>
 
             <button
+              suppressHydrationWarning
               onClick={onStartAgreement}
               className="px-6 py-2.5 rounded-full font-bold text-xs sm:text-sm text-[#0F103A] bg-[#F8FAFC] hover:bg-white shadow-sm flex items-center gap-2 cursor-pointer transition-all"
             >
-              <span>Get Started →</span>
+              <span>Request Call Back</span>
             </button>
           </div>
         </div>
@@ -72,7 +73,7 @@ export default function Footer({
           <div className="space-y-4">
             <Logo size="md" variant="light" />
             <p className="text-xs text-white/70 leading-relaxed max-w-xs">
-              Go Prime Services specializes in fast, reliable, and legally valid government documentation services with doorstep biometric verification.
+              Go Prime Services provides government and private services from the comfort of your home as a Common Service Centre under the Digital India program.
             </p>
             <div className="flex items-center gap-2 text-xs text-[#D2AC65] font-semibold">
               <ShieldCheck className="w-4 h-4" />
@@ -88,35 +89,36 @@ export default function Footer({
             <ul className="space-y-2.5 text-xs text-white/80">
               <li>
                 <a href="#services" className="hover:text-[#D2AC65] transition-colors">
-                  Rental Agreement (11 Months)
+                  Registered Rent Agreement
                 </a>
               </li>
               <li>
                 <a href="#services" className="hover:text-[#D2AC65] transition-colors">
-                  Lease Agreement
+                  Notarized Rent Agreement
                 </a>
               </li>
               <li>
                 <a href="#services" className="hover:text-[#D2AC65] transition-colors">
-                  Affidavit &amp; Notary Services
+                  Partnership Deed Registration
                 </a>
               </li>
               <li>
                 <a href="#services" className="hover:text-[#D2AC65] transition-colors">
-                  Tenant Police Verification
+                  Court Marriage &amp; Registered Marriage
                 </a>
               </li>
               <li>
                 <a href="#services" className="hover:text-[#D2AC65] transition-colors">
-                  Sale Deed &amp; Power of Attorney
+                  Passport, PAN &amp; Aadhaar Services
                 </a>
               </li>
               <li>
                 <button
+                  suppressHydrationWarning
                   onClick={onOpenAllServices}
                   className="text-[#D2AC65] hover:underline font-bold cursor-pointer pt-1"
                 >
-                  View All Services Catalog →
+                  View All Services Catalog
                 </button>
               </li>
             </ul>
@@ -140,6 +142,7 @@ export default function Footer({
               </li>
               <li>
                 <button
+                  suppressHydrationWarning
                   onClick={onOpenTrackOrder}
                   className="hover:text-[#D2AC65] transition-colors cursor-pointer text-left"
                 >
@@ -153,7 +156,7 @@ export default function Footer({
               </li>
               <li className="pt-2 text-[11px] text-white/50">
                 <span className="text-[#D2AC65] font-semibold block mb-0.5">Coverage Cities:</span>
-                Bengaluru · Delhi NCR · Mumbai · Pune · Hyderabad
+                Maharashtra, with doorstep biometric verification across India and worldwide
               </li>
             </ul>
           </div>
@@ -167,24 +170,24 @@ export default function Footer({
               <li className="flex items-center gap-2.5">
                 <MessageCircle className="w-4 h-4 text-[#25D366]" />
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/919421215055"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#D2AC65]"
                 >
-                  +91 98765 43210 (WhatsApp)
+                  +91 94212 15055 (WhatsApp)
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#D2AC65]" />
-                <a href="tel:+919876543210" className="hover:text-[#D2AC65]">
-                  +91 98765 43210 / 11
+                <a href="tel:+919421215055" className="hover:text-[#D2AC65]">
+                  +91 94212 15055
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#D2AC65]" />
-                <a href="mailto:contact@goprimeservices.com" className="hover:text-[#D2AC65]">
-                  contact@goprimeservices.com
+                <a href="mailto:contactgoprimeservices@gmail.com" className="hover:text-[#D2AC65]">
+                  contactgoprimeservices@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
@@ -207,6 +210,7 @@ export default function Footer({
               100% Legally Valid &amp; Government Compliant Registration
             </span>
             <button
+              suppressHydrationWarning
               onClick={scrollToTop}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
             >
