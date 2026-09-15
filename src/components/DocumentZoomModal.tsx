@@ -22,7 +22,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
-import { HERO_VIDEOS } from "@/components/BackgroundVideoPlayer";
+import { HERO_VIDEOS, HeroVideoItem } from "@/components/BackgroundVideoPlayer";
 import Logo from "@/components/Logo";
 
 interface DocumentZoomModalProps {
@@ -51,7 +51,7 @@ export default function DocumentZoomModal({
 
   if (!isOpen) return null;
 
-  const currentVid = HERO_VIDEOS[selectedVideo] || HERO_VIDEOS[0];
+  const currentVid: HeroVideoItem = HERO_VIDEOS[selectedVideo] || HERO_VIDEOS[0];
 
   return (
     <AnimatePresence>
