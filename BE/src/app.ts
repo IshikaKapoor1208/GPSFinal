@@ -15,9 +15,9 @@ app.use(express.json({ limit: "30kb" }));
 
 const leadLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 10, standardHeaders: true, legacyHeaders: false });
 
-app.get("/health", (_request, response) => response.status(200).json({ status: "ok" }));
+app.get("/health", (_request: express.Request, response: express.Response) => response.status(200).json({ status: "ok" }));
 
-app.post("/api/v1/inquiries", leadLimiter, async (request, response, next) => {
+app.post("/api/v1/inquiries", leadLimiter, async (request: express.Request, response: express.Response, next: express.NextFunction) => {
   try {
     const data = inquirySchema.parse(request.body);
     const lead = await createLead({ leadType: "inquiry", name: data.name, phone: data.phone, email: data.email, service: data.service, details: { preferredSlot: data.preferredSlot, message: data.message } });
@@ -25,7 +25,7 @@ app.post("/api/v1/inquiries", leadLimiter, async (request, response, next) => {
   } catch (error) { next(error); }
 });
 
-app.post("/api/v1/callback-requests", leadLimiter, async (request, response, next) => {
+app.post("/api/v1/callback-requests", leadLimiter, async (request: express.Request, response: express.Response, next: express.NextFunction) => {
   try {
     const data = callbackRequestSchema.parse(request.body);
     const lead = await createLead({ leadType: "callback_request", name: data.name, phone: data.phone, service: data.service, details: { preferredTime: data.preferredTime, notes: data.notes } });
@@ -33,7 +33,7 @@ app.post("/api/v1/callback-requests", leadLimiter, async (request, response, nex
   } catch (error) { next(error); }
 });
 
-app.post("/api/v1/document-bookings", leadLimiter, async (request, response, next) => {
+app.post("/api/v1/document-bookings", leadLimiter, async (request: express.Request, response: express.Response, next: express.NextFunction) => {
   try {
     const data = documentBookingSchema.parse(request.body);
     const { phone, email, serviceType, website: _website, ...details } = data;

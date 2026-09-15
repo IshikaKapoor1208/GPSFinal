@@ -2,21 +2,47 @@
 
 import React, { useRef, useEffect } from "react";
 
-export const HERO_VIDEOS = [
+export interface HeroVideoItem {
+  id: number;
+  stepNum: string;
+  shortTitle: string;
+  src: string;
+  badge: string;
+  tag: string;
+  title: string;
+  subtitle: string;
+}
+
+export const HERO_VIDEOS: HeroVideoItem[] = [
   {
     id: 0,
+    stepNum: "01",
+    shortTitle: "Drafting",
     src: "/video/one.mp4",
+    badge: "Custom Legal Drafting",
+    tag: "STEP 01: DRAFTING & REVIEW",
     title: "Drafting & Terms Consultation",
+    subtitle: "Custom clauses tailored to your property requirements with fast turnaround.",
   },
   {
     id: 1,
+    stepNum: "02",
+    shortTitle: "Biometrics",
     src: "/video/two.mp4",
+    badge: "Doorstep Verification",
+    tag: "STEP 02: BIOMETRIC VERIFICATION",
     title: "Doorstep Biometrics",
+    subtitle: "Authorized executive visits your location for fingerprint and Aadhaar eKYC.",
   },
   {
     id: 2,
+    stepNum: "03",
+    shortTitle: "Registration",
     src: "/video/three.mp4",
+    badge: "Govt Registration",
+    tag: "STEP 03: GOVT APPROVAL",
     title: "Govt Stamping & Registration",
+    subtitle: "Official e-stamp certificate and registered rent agreement copy delivered.",
   },
 ];
 
