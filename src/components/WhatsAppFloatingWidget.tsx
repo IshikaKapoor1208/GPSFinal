@@ -49,7 +49,7 @@ export default function WhatsAppFloatingWidget({
 
   return (
     <div
-      className={`fixed bottom-6 right-6 z-50 flex flex-col items-end transition-all duration-300 ${
+      className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end transition-all duration-300 ${
         visible ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-90 pointer-events-none"
       }`}
     >
@@ -61,7 +61,7 @@ export default function WhatsAppFloatingWidget({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.92 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="mb-4 w-80 sm:w-96 bg-white border border-[#E2E6EE] rounded-3xl shadow-2xl overflow-hidden"
+            className="mb-3 w-[calc(100vw-2rem)] max-w-sm sm:w-96 bg-white border border-[#E2E6EE] rounded-3xl shadow-2xl overflow-hidden"
           >
             {/* Header */}
             <div className="bg-[#14164F] p-4 text-white relative">

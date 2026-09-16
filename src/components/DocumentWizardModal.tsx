@@ -113,13 +113,13 @@ export default function DocumentWizardModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full max-w-2xl bg-[#F8FAFC] border border-[#E2E6EE] rounded-3xl shadow-2xl overflow-hidden z-10 p-6 sm:p-8 my-8"
+          className="relative w-full max-w-2xl max-h-[90dvh] overflow-y-auto bg-[#F8FAFC] border border-[#E2E6EE] rounded-3xl shadow-2xl z-10 p-5 sm:p-8 my-auto"
         >
           {/* Close Button */}
           <button
             suppressHydrationWarning
             onClick={onClose}
-            className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] hover:bg-[#1F216B] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute top-4 right-4 sm:top-5 sm:right-5 w-9 h-9 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] hover:bg-[#1F216B] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Close document wizard"
           >
             <X className="w-4 h-4" />
@@ -127,7 +127,7 @@ export default function DocumentWizardModal({
 
           {isSuccess ? (
             /* Submission Success Screen */
-            <div className="text-center py-8">
+            <div className="text-center py-6 sm:py-8">
               <Logo size="sm" className="justify-center mb-6" />
               <div className="w-16 h-16 rounded-2xl bg-[#1F216B] text-white flex items-center justify-center mx-auto mb-5 shadow-lg">
                 <CheckCircle2 className="w-9 h-9 text-emerald-400" />
@@ -160,7 +160,7 @@ export default function DocumentWizardModal({
                   href={`https://wa.me/919421215055?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-xs sm:text-sm text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-xs sm:text-sm text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm transition-all min-h-[46px]"
                 >
                   <WhatsappIcon size={16} color="white" strokeWidth={2} />
                   <span>Chat with Legal Desk on WhatsApp</span>
@@ -168,7 +168,7 @@ export default function DocumentWizardModal({
                 <button
                   suppressHydrationWarning
                   onClick={handleReset}
-                  className="px-6 py-3 rounded-full font-bold text-xs sm:text-sm text-[#0F172A] bg-white border border-[#E2E6EE] hover:bg-[#F8FAFC] transition-all cursor-pointer"
+                  className="px-6 py-3.5 rounded-full font-bold text-xs sm:text-sm text-[#0F172A] bg-white border border-[#E2E6EE] hover:bg-[#F8FAFC] transition-all cursor-pointer min-h-[46px]"
                 >
                   Done
                 </button>
@@ -178,7 +178,7 @@ export default function DocumentWizardModal({
             /* Wizard Steps */
             <div>
               {/* Top Step Progress Bar */}
-              <div className="mb-6">
+              <div className="mb-6 pr-8">
                 <div className="flex items-center justify-between text-xs font-bold text-[#828DA4] mb-2 uppercase tracking-wider">
                   <span>Step {step} of 3</span>
                   <span className="text-[#1F216B]">
@@ -222,7 +222,7 @@ export default function DocumentWizardModal({
                         name="serviceType"
                         value={formData.serviceType}
                         onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                        className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
+                        className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
                       >
                         <option value="Registered Rent Agreement">Registered Rent Agreement</option>
                         <option value="Notarized Rent Agreement">Notarized Rent Agreement</option>
@@ -247,7 +247,7 @@ export default function DocumentWizardModal({
                             name="city"
                             value={formData.city}
                             onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                            className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
+                            className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
                           >
                             <option value="Maharashtra">Maharashtra</option>
                             <option value="Mumbai">Mumbai (Maharashtra)</option>
@@ -271,7 +271,7 @@ export default function DocumentWizardModal({
                           type="text"
                           value={formData.locality}
                           onChange={(e) => setFormData({ ...formData, locality: e.target.value })}
-                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
+                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
                         />
                       </div>
                     </div>
@@ -308,7 +308,7 @@ export default function DocumentWizardModal({
                             type="text"
                             value={formData.landlordName}
                             onChange={(e) => setFormData({ ...formData, landlordName: e.target.value })}
-                            className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none"
+                            className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none"
                           />
                         </div>
                       </div>
@@ -326,7 +326,7 @@ export default function DocumentWizardModal({
                             type="text"
                             value={formData.tenantName}
                             onChange={(e) => setFormData({ ...formData, tenantName: e.target.value })}
-                            className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none"
+                            className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none"
                           />
                         </div>
                       </div>
@@ -344,7 +344,7 @@ export default function DocumentWizardModal({
                           type="number"
                           value={formData.monthlyRent}
                           onChange={(e) => setFormData({ ...formData, monthlyRent: e.target.value })}
-                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none"
+                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none"
                         />
                       </div>
 
@@ -359,7 +359,7 @@ export default function DocumentWizardModal({
                           type="number"
                           value={formData.securityDeposit}
                           onChange={(e) => setFormData({ ...formData, securityDeposit: e.target.value })}
-                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none"
+                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none"
                         />
                       </div>
                     </div>
@@ -395,14 +395,16 @@ export default function DocumentWizardModal({
                             name="phone"
                             type="tel"
                             inputMode="numeric"
+                            autoComplete="tel"
                             maxLength={10}
                             required
+                            placeholder="10-digit mobile number"
                             value={formData.phone}
                             onChange={(e) => {
                               const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
                               setFormData({ ...formData, phone: digits });
                             }}
-                            className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] focus:outline-none"
+                            className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none"
                           />
                         </div>
                       </div>
@@ -416,9 +418,11 @@ export default function DocumentWizardModal({
                           id="wiz-email"
                           name="email"
                           type="email"
+                          inputMode="email"
+                          autoComplete="email"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none"
+                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none"
                         />
                       </div>
                     </div>
@@ -433,13 +437,17 @@ export default function DocumentWizardModal({
                         name="verificationMode"
                         value={formData.verificationMode}
                         onChange={(e) => setFormData({ ...formData, verificationMode: e.target.value })}
-                        className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none cursor-pointer"
+                        className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none cursor-pointer"
                       >
                         <option value="Doorstep Biometric (UIDAI)">Doorstep Biometric Verification (UIDAI Approved)</option>
                         <option value="Aadhaar E-Sign (Paperless)">Aadhaar OTP / E-Sign (100% Online)</option>
                         <option value="Notary & Hardcopy Courier">Physical Notary Stamp &amp; Speed Courier Delivery</option>
                       </select>
-                      {submitError && <p role="alert" className="text-xs text-red-600 mt-2">{submitError}</p>}
+                      {submitError && (
+                        <div role="alert" className="p-3 mt-2 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 font-medium">
+                          {submitError}
+                        </div>
+                      )}
                     </div>
 
                     <div className="p-3.5 rounded-2xl bg-[#EEF2FB] border border-[#CCD6F0] text-xs text-[#1F216B] flex items-center gap-2">
@@ -456,7 +464,7 @@ export default function DocumentWizardModal({
                       suppressHydrationWarning
                       type="button"
                       onClick={handlePrev}
-                      className="px-5 py-3 rounded-full border border-[#E2E6EE] text-xs font-bold text-[#0F172A] hover:bg-white flex items-center gap-1.5 cursor-pointer"
+                      className="px-5 py-3.5 min-h-[46px] rounded-full border border-[#E2E6EE] text-xs font-bold text-[#0F172A] hover:bg-white active:bg-slate-100 flex items-center gap-1.5 cursor-pointer"
                     >
                       <ArrowLeft className="w-3.5 h-3.5" />
                       <span>Back</span>
@@ -470,7 +478,7 @@ export default function DocumentWizardModal({
                       suppressHydrationWarning
                       type="button"
                       onClick={handleNext}
-                      className="px-7 py-3 rounded-full bg-[#1F216B] hover:bg-[#14164F] text-white text-xs sm:text-sm font-bold shadow-md flex items-center gap-2 cursor-pointer"
+                      className="px-7 py-3.5 min-h-[46px] rounded-full bg-[#1F216B] hover:bg-[#14164F] active:scale-[0.99] text-white text-xs sm:text-sm font-bold shadow-md flex items-center gap-2 cursor-pointer"
                     >
                       <span>Continue</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -480,7 +488,7 @@ export default function DocumentWizardModal({
                       suppressHydrationWarning
                       type="submit"
                       disabled={submitting}
-                      className="px-7 py-3 rounded-full bg-[#1F216B] hover:bg-[#14164F] text-white text-xs sm:text-sm font-bold shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                      className="px-7 py-3.5 min-h-[46px] rounded-full bg-[#1F216B] hover:bg-[#14164F] active:scale-[0.99] text-white text-xs sm:text-sm font-bold shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
                     >
                       {submitting ? (
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

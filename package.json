@@ -6,7 +6,8 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:api": "npm --prefix BE run test:integration"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",

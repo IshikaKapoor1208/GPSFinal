@@ -266,9 +266,10 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                           name="name"
                           type="text"
                           required
+                          autoComplete="name"
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
+                          className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] focus:bg-white rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
                         />
                       </div>
 
@@ -282,14 +283,16 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                           name="phone"
                           type="tel"
                           inputMode="numeric"
+                          autoComplete="tel"
                           maxLength={10}
                           required
+                          placeholder="10-digit mobile number"
                           value={formData.phone}
                           onChange={(e) => {
                             const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
                             setFormData({ ...formData, phone: digits });
                           }}
-                          className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
+                          className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] focus:bg-white rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
                         />
                       </div>
                     </div>
@@ -304,9 +307,11 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                           id="email"
                           name="email"
                           type="email"
+                          inputMode="email"
+                          autoComplete="email"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
+                          className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] focus:bg-white rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
                         />
                       </div>
 
@@ -320,7 +325,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                           name="service"
                           value={formData.service}
                           onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                          className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
+                          className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] focus:bg-white rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
                         >
                           <option value="Registered Rent Agreement">Registered Rent Agreement</option>
                           <option value="Notarized Rent Agreement">Notarized Rent Agreement</option>
@@ -343,7 +348,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                         name="preferredSlot"
                         value={formData.preferredSlot}
                         onChange={(e) => setFormData({ ...formData, preferredSlot: e.target.value })}
-                        className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl px-4 py-3 text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
+                        className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] focus:bg-white rounded-2xl px-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
                       >
                         <option value="Morning (10:00 AM - 1:00 PM)">Morning (10:00 AM - 1:00 PM)</option>
                         <option value="Afternoon (1:00 PM - 4:00 PM)">Afternoon (1:00 PM - 4:00 PM)</option>
@@ -363,16 +368,20 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                         rows={3}
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl p-3.5 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
+                        className="w-full bg-[#F8FAFC] border border-[#E2E6EE] focus:border-[#1F216B] focus:bg-white rounded-2xl p-3.5 text-base sm:text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
                       />
-                      {submitError && <p role="alert" className="text-xs text-red-600 mt-2">{submitError}</p>}
+                      {submitError && (
+                        <div role="alert" className="p-3 mt-2 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 font-medium">
+                          {submitError}
+                        </div>
+                      )}
                     </div>
 
                     <button
                       suppressHydrationWarning
                       type="submit"
                       disabled={submitting}
-                      className="w-full py-4 rounded-full font-bold text-sm text-white bg-[#1F216B] hover:bg-[#14164F] shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                      className="w-full py-4 min-h-[50px] rounded-full font-bold text-sm sm:text-base text-white bg-[#1F216B] hover:bg-[#14164F] active:scale-[0.99] shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                     >
                       {submitting ? (
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

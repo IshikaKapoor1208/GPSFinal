@@ -170,20 +170,20 @@ export default function Navbar({
             </button>
           </div>
 
-          {/* Mobile Hamburger Menu Toggle */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile Actions: Compact Call Back + Hamburger */}
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
             <button
               suppressHydrationWarning
               onClick={onOpenCallback}
-              className="px-4 py-2 rounded-full bg-[#1F216B] text-white text-xs font-semibold"
+              className="px-3 sm:px-4 py-2 rounded-full bg-[#1F216B] active:bg-[#14164F] text-white text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-xs cursor-pointer min-h-[38px] flex items-center justify-center"
             >
-              Request Call Back
+              <span>Call Back</span>
             </button>
 
             <button
               suppressHydrationWarning
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-10 h-10 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] flex items-center justify-center transition-colors cursor-pointer"
+              className="w-10 h-10 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] active:bg-[#F1F5F9] flex items-center justify-center transition-colors cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -201,57 +201,86 @@ export default function Navbar({
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden bg-white border-b border-[#E2E6EE] px-4 pt-3 pb-6 shadow-xl"
+            className="lg:hidden bg-white border-b border-[#E2E6EE] px-4 pt-3 pb-6 shadow-xl max-h-[80vh] overflow-y-auto"
           >
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               <a
                 href="#home"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC]"
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between"
               >
-                Home
+                <span>Home</span>
               </a>
               <a
                 href="#services"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC]"
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between"
               >
-                Services
+                <span>Our Services</span>
               </a>
-              <a
-                href="#careers"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC]"
+              <button
+                suppressHydrationWarning
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenAllServices();
+                }}
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-[#1F216B] active:bg-[#EEF2FB] flex items-center justify-between cursor-pointer"
               >
-                Careers
+                <span>View Full Catalog</span>
+                <ArrowRight className="w-4 h-4 text-[#1F216B]" />
+              </button>
+              <button
+                suppressHydrationWarning
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenTrackOrder();
+                }}
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between cursor-pointer"
+              >
+                <span>Track Order Status</span>
+              </button>
+              <a
+                href="#how-it-works"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between"
+              >
+                <span>How It Works</span>
               </a>
               <a
                 href="#about"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC]"
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between"
               >
-                About Us
+                <span>About Us</span>
               </a>
               <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC]"
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between"
               >
-                Contact Us
+                <span>Contact Us</span>
               </a>
 
-              <div className="pt-3 mt-2 border-t border-[#E2E6EE] flex flex-col gap-2">
+              <div className="pt-3 mt-2 border-t border-[#E2E6EE] flex flex-col gap-2.5">
                 <button
                   suppressHydrationWarning
                   onClick={() => {
                     setMobileMenuOpen(false);
                     onOpenCallback();
                   }}
-                  className="w-full py-3 rounded-full font-semibold text-sm text-white bg-[#1F216B] flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  className="w-full py-3.5 rounded-full font-bold text-sm text-white bg-[#1F216B] active:bg-[#14164F] flex items-center justify-center gap-2 cursor-pointer shadow-md min-h-[48px]"
                 >
                   <span>Request Call Back</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
+                <a
+                  href="https://wa.me/919421215055?text=Hello%20Go%20Prime%20Services!%20I%20need%20assistance%20with%20legal%20documentation."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 rounded-full font-bold text-xs text-[#25D366] bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center gap-2"
+                >
+                  <span>Chat on WhatsApp</span>
+                </a>
               </div>
             </div>
           </motion.div>

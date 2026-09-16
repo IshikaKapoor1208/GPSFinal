@@ -41,7 +41,7 @@ export default function HeroContent({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h1 className="text-4xl sm:text-6xl xl:text-[4.25rem] font-bold text-[#0F172A] tracking-tight leading-[1.08]">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-bold text-[#0F172A] tracking-tight leading-[1.1]">
               Registered Rent Agreement Services. <br />
               <span
                 className="font-serif italic font-normal text-[#2B2E8F] inline-block mt-1 sm:mt-1.5"
@@ -57,7 +57,7 @@ export default function HeroContent({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-base sm:text-lg text-[#334155] max-w-xl font-normal leading-relaxed"
+            className="text-sm sm:text-lg text-[#334155] max-w-xl font-normal leading-relaxed"
           >
             Need a rent agreement? Contact us for quick support, easy documentation, and doorstep assistance with government-compliant registration.
           </motion.p>
@@ -67,13 +67,13 @@ export default function HeroContent({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1"
           >
             {/* Primary Pill Button */}
             <button
               suppressHydrationWarning
               onClick={onStartAgreement}
-              className="px-7 py-4 rounded-full font-semibold text-sm sm:text-base text-white bg-[#1F216B] hover:bg-[#14164F] shadow-md hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group"
+              className="w-full sm:w-auto px-7 py-4 min-h-[48px] rounded-full font-bold text-sm sm:text-base text-white bg-[#1F216B] hover:bg-[#14164F] active:scale-[0.98] shadow-md hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group"
             >
               <span>Request Call Back</span>
               <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
@@ -83,7 +83,7 @@ export default function HeroContent({
             <button
               suppressHydrationWarning
               onClick={onOpenAllServices}
-              className="px-6 py-4 rounded-full font-semibold text-sm sm:text-base text-[#1F216B] bg-white/90 hover:bg-white border border-[#CCD4E6] hover:border-[#1F216B] shadow-2xs transition-all duration-200 flex items-center justify-center cursor-pointer backdrop-blur-sm"
+              className="w-full sm:w-auto px-6 py-4 min-h-[48px] rounded-full font-bold text-sm sm:text-base text-[#1F216B] bg-white/90 hover:bg-white active:scale-[0.98] border border-[#CCD4E6] hover:border-[#1F216B] shadow-2xs transition-all duration-200 flex items-center justify-center cursor-pointer backdrop-blur-sm"
             >
               <span>Explore Our Services</span>
             </button>

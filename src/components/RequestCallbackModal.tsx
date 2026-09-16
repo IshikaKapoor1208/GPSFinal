@@ -94,20 +94,20 @@ export default function RequestCallbackModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ duration: 0.2 }}
-            className="relative w-full max-w-lg bg-[#F8FAFC] border border-[#E2E6EE] rounded-3xl shadow-2xl overflow-hidden z-10 p-6 sm:p-8"
+            className="relative w-full max-w-lg max-h-[90dvh] overflow-y-auto bg-[#F8FAFC] border border-[#E2E6EE] rounded-3xl shadow-2xl z-10 p-5 sm:p-8"
           >
             {/* Close Button */}
             <button
               suppressHydrationWarning
               onClick={onClose}
-              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] hover:bg-[#1F216B] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+              className="absolute top-4 right-4 sm:top-5 sm:right-5 w-9 h-9 rounded-full bg-white border border-[#E2E6EE] text-[#0F172A] hover:bg-[#1F216B] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-4 h-4" />
             </button>
 
             {isSuccess ? (
-              <div className="text-center py-8">
+              <div className="text-center py-6 sm:py-8">
                 <div className="w-16 h-16 rounded-2xl bg-[#1F216B] text-white flex items-center justify-center mx-auto mb-5 shadow-md">
                   <CheckCircle2 className="w-9 h-9 text-emerald-400" />
                 </div>
@@ -125,7 +125,7 @@ export default function RequestCallbackModal({
                     href={`https://wa.me/919421215055?text=${whatsappMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-xs text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-xs sm:text-sm text-white bg-[#25D366] hover:bg-[#1EBE5D] shadow-sm transition-all min-h-[46px]"
                   >
                     <WhatsappIcon size={16} color="white" strokeWidth={2} />
                     <span>Chat on WhatsApp Now</span>
@@ -133,7 +133,7 @@ export default function RequestCallbackModal({
                   <button
                     suppressHydrationWarning
                     onClick={handleReset}
-                    className="px-6 py-3 rounded-full font-bold text-xs text-[#0F172A] bg-white border border-[#E2E6EE] hover:bg-[#F8FAFC] transition-all cursor-pointer"
+                    className="px-6 py-3.5 rounded-full font-bold text-xs sm:text-sm text-[#0F172A] bg-white border border-[#E2E6EE] hover:bg-[#F8FAFC] transition-all cursor-pointer min-h-[46px]"
                   >
                     Done
                   </button>
@@ -142,13 +142,13 @@ export default function RequestCallbackModal({
             ) : (
               <div>
                 {/* Header */}
-                <div className="mb-6">
-                  <Logo size="sm" className="mb-4" />
+                <div className="mb-5 sm:mb-6 pr-8">
+                  <Logo size="sm" className="mb-3" />
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF2FB] text-[#1F216B] text-xs font-bold uppercase tracking-wider mb-2">
                     <Phone className="w-3 h-3 text-[#1F216B]" />
                     <span>Quick Callback Desk</span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-[#0F172A]">
+                  <h3 className="text-xl sm:text-3xl font-bold text-[#0F172A]">
                     Request a Call Back
                   </h3>
                   <p className="text-xs sm:text-sm text-[#555D75] mt-1">
@@ -171,9 +171,10 @@ export default function RequestCallbackModal({
                         name="name"
                         type="text"
                         required
+                        autoComplete="name"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] focus:ring-1 focus:ring-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
+                        className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] focus:ring-1 focus:ring-[#1F216B] rounded-2xl pl-10 pr-4 py-3.5 text-base sm:text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
@@ -191,14 +192,16 @@ export default function RequestCallbackModal({
                         name="phone"
                         type="tel"
                         inputMode="numeric"
+                        autoComplete="tel"
                         maxLength={10}
                         required
+                        placeholder="10-digit mobile number"
                         value={formData.phone}
                         onChange={(e) => {
                           const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
                           setFormData({ ...formData, phone: digits });
                         }}
-                        className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] focus:ring-1 focus:ring-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
+                        className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] focus:ring-1 focus:ring-[#1F216B] rounded-2xl pl-10 pr-4 py-3.5 text-base sm:text-sm text-[#0F172A] placeholder:text-[#828DA4] focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
@@ -217,7 +220,7 @@ export default function RequestCallbackModal({
                           name="service"
                           value={formData.service}
                           onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-xs sm:text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
+                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
                         >
                           <option value="Rental Agreement">Rental Agreement</option>
                           <option value="Notarized Rent Agreement">Notarized Rent Agreement</option>
@@ -241,7 +244,7 @@ export default function RequestCallbackModal({
                           name="preferredTime"
                           value={formData.preferredTime}
                           onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3 text-xs sm:text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
+                          className="w-full bg-white border border-[#E2E6EE] focus:border-[#1F216B] rounded-2xl pl-10 pr-4 py-3.5 text-base sm:text-sm text-[#0F172A] focus:outline-none transition-colors cursor-pointer"
                         >
                           <option value="Next 15 minutes">Next 15 minutes</option>
                           <option value="Today (Morning)">Today (Morning)</option>
@@ -250,16 +253,21 @@ export default function RequestCallbackModal({
                           <option value="Tomorrow (Morning)">Tomorrow (Morning)</option>
                         </select>
                       </div>
-                      {submitError && <p role="alert" className="text-xs text-red-600 mt-2">{submitError}</p>}
                     </div>
                   </div>
+
+                  {submitError && (
+                    <div role="alert" className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 font-medium">
+                      {submitError}
+                    </div>
+                  )}
 
                   {/* Submit Button */}
                   <button
                     suppressHydrationWarning
                     type="submit"
                     disabled={submitting}
-                    className="w-full mt-2 py-3.5 rounded-full font-bold text-sm text-white bg-[#1F216B] hover:bg-[#14164F] shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="w-full mt-2 py-4 min-h-[48px] rounded-full font-bold text-sm text-white bg-[#1F216B] hover:bg-[#14164F] active:scale-[0.99] shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {submitting ? (
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
