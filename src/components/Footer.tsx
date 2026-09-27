@@ -186,8 +186,8 @@ export default function Footer({
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#D2AC65]" />
-                <a href="mailto:contactgoprimeservices@gmail.com" className="hover:text-[#D2AC65]">
+                <Mail className="w-4 h-4 text-[#D2AC65] flex-shrink-0" />
+                <a href="mailto:contactgoprimeservices@gmail.com" className="hover:text-[#D2AC65] break-all sm:break-normal">
                   contactgoprimeservices@gmail.com
                 </a>
               </li>

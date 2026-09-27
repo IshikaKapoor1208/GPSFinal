@@ -36,7 +36,7 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faqs" className="py-16 sm:py-24 bg-white relative border-t border-[#E2E6EE]">
+    <section id="faqs" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 bg-white relative border-t border-[#E2E6EE]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}

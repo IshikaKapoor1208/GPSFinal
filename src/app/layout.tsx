@@ -66,11 +66,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/logo/logo.png", type: "image/png" },
+      { url: "/icon", sizes: "96x96", type: "image/png" },
     ],
     shortcut: ["/favicon.svg"],
     apple: [
-      { url: "/logo/logo.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-icon", sizes: "180x180", type: "image/png" },
     ],
   },
   openGraph: {
@@ -114,8 +114,9 @@ export default function RootLayout({
     <html lang="en" className="light scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/logo/logo.png" type="image/png" sizes="any" />
-        <link rel="apple-touch-icon" href="/logo/logo.png" />
+        <link rel="icon" href="/icon" type="image/png" sizes="96x96" />
+        <link rel="apple-touch-icon" href="/apple-icon" sizes="180x180" />
+        <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="canonical" href="https://www.goprimeservices.com" />
         <JsonLdSchema />
       </head>

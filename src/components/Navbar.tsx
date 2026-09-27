@@ -44,9 +44,40 @@ export default function Navbar({
     { name: "Passport, PAN & Aadhaar Services", href: "#services", icon: FileBadge },
   ];
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      setMobileMenuOpen(false);
+      setServicesDropdownOpen(false);
+
+      if (typeof window !== "undefined") {
+        document.body.style.overflow = "";
+        window.dispatchEvent(new CustomEvent("complete-intro"));
+      }
+
+      setTimeout(() => {
+        const target = document.querySelector(href);
+        if (target) {
+          const headerOffset = 76;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: Math.max(0, offsetPosition),
+            behavior: "smooth",
+          });
+          window.history.pushState(null, "", href);
+        }
+      }, 50);
+    }
+  };
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 bg-[#F8FAFC]/90 backdrop-blur-md border-b border-[#E2E6EE] transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 bg-[#F8FAFC]/95 backdrop-blur-md border-b border-[#E2E6EE] transition-all duration-300 ${
         visible ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-full opacity-0 pointer-events-none"
       }`}
     >
@@ -56,6 +87,7 @@ export default function Navbar({
           {/* Logo */}
           <a
             href="#home"
+            onClick={(e) => handleNavClick(e, "#home")}
             className="flex items-center gap-2 group cursor-pointer focus:outline-none"
             aria-label="Go Prime Services Home"
           >
@@ -66,6 +98,7 @@ export default function Navbar({
           <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-[#0F172A]">
             <a
               href="#home"
+              onClick={(e) => handleNavClick(e, "#home")}
               className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155]"
             >
               <span>Home</span>
@@ -79,6 +112,7 @@ export default function Navbar({
             >
               <a
                 href="#services"
+                onClick={(e) => handleNavClick(e, "#services")}
                 className="py-2 transition-colors hover:text-[#1F216B] font-medium flex items-center gap-1 cursor-pointer text-[#334155]"
               >
                 <span>Services</span>
@@ -105,7 +139,7 @@ export default function Navbar({
                           <a
                             key={idx}
                             href={item.href}
-                            onClick={() => setServicesDropdownOpen(false)}
+                            onClick={(e) => handleNavClick(e, item.href)}
                             className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#F8FAFC] text-xs font-semibold text-[#0F172A] transition-colors"
                           >
                             <div className="w-7 h-7 rounded-lg bg-[#EEF2FB] flex items-center justify-center text-[#1F216B]">
@@ -136,14 +170,16 @@ export default function Navbar({
             </div>
 
             <a
-              href="#careers"
+              href="#how-it-works"
+              onClick={(e) => handleNavClick(e, "#how-it-works")}
               className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155]"
             >
-              <span>Careers</span>
+              <span>How It Works</span>
             </a>
 
             <a
               href="#about"
+              onClick={(e) => handleNavClick(e, "#about")}
               className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155]"
             >
               <span>About Us</span>
@@ -151,6 +187,7 @@ export default function Navbar({
 
             <a
               href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
               className="py-2 transition-colors hover:text-[#1F216B] font-medium text-[#334155]"
             >
               <span>Contact Us</span>
@@ -201,20 +238,20 @@ export default function Navbar({
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden bg-white border-b border-[#E2E6EE] px-4 pt-3 pb-6 shadow-xl max-h-[80vh] overflow-y-auto"
+            className="lg:hidden bg-white border-b border-[#E2E6EE] px-4 pt-3 pb-6 shadow-xl max-h-[82vh] overflow-y-auto"
           >
             <div className="flex flex-col gap-1">
               <a
                 href="#home"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between"
+                onClick={(e) => handleNavClick(e, "#home")}
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC] active:bg-[#EEF2FB] flex items-center justify-between transition-colors"
               >
                 <span>Home</span>
               </a>
               <a
                 href="#services"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between"
+                onClick={(e) => handleNavClick(e, "#services")}
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC] active:bg-[#EEF2FB] flex items-center justify-between transition-colors"
               >
                 <span>Our Services</span>
               </a>
@@ -224,7 +261,7 @@ export default function Navbar({
                   setMobileMenuOpen(false);
                   onOpenAllServices();
                 }}
-                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-[#1F216B] active:bg-[#EEF2FB] flex items-center justify-between cursor-pointer"
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-[#1F216B] hover:bg-[#EEF2FB] active:bg-[#EEF2FB] flex items-center justify-between cursor-pointer transition-colors"
               >
                 <span>View Full Catalog</span>
                 <ArrowRight className="w-4 h-4 text-[#1F216B]" />
@@ -235,28 +272,28 @@ export default function Navbar({
                   setMobileMenuOpen(false);
                   onOpenTrackOrder();
                 }}
-                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between cursor-pointer"
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC] active:bg-[#EEF2FB] flex items-center justify-between cursor-pointer transition-colors"
               >
                 <span>Track Order Status</span>
               </button>
               <a
                 href="#how-it-works"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between"
+                onClick={(e) => handleNavClick(e, "#how-it-works")}
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC] active:bg-[#EEF2FB] flex items-center justify-between transition-colors"
               >
                 <span>How It Works</span>
               </a>
               <a
                 href="#about"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between"
+                onClick={(e) => handleNavClick(e, "#about")}
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC] active:bg-[#EEF2FB] flex items-center justify-between transition-colors"
               >
                 <span>About Us</span>
               </a>
               <a
                 href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] active:bg-[#F8FAFC] flex items-center justify-between"
+                onClick={(e) => handleNavClick(e, "#contact")}
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-[#0F172A] hover:bg-[#F8FAFC] active:bg-[#EEF2FB] flex items-center justify-between transition-colors"
               >
                 <span>Contact Us</span>
               </a>
@@ -268,7 +305,7 @@ export default function Navbar({
                     setMobileMenuOpen(false);
                     onOpenCallback();
                   }}
-                  className="w-full py-3.5 rounded-full font-bold text-sm text-white bg-[#1F216B] active:bg-[#14164F] flex items-center justify-center gap-2 cursor-pointer shadow-md min-h-[48px]"
+                  className="w-full py-3.5 rounded-full font-bold text-sm text-white bg-[#1F216B] hover:bg-[#14164F] active:bg-[#14164F] flex items-center justify-center gap-2 cursor-pointer shadow-md min-h-[48px] transition-all"
                 >
                   <span>Request Call Back</span>
                   <ArrowRight className="w-4 h-4" />
@@ -277,7 +314,7 @@ export default function Navbar({
                   href="https://wa.me/919421215055?text=Hello%20Go%20Prime%20Services!%20I%20need%20assistance%20with%20legal%20documentation."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3 rounded-full font-bold text-xs text-[#25D366] bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-full font-bold text-xs text-[#25D366] bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center gap-2 transition-all"
                 >
                   <span>Chat on WhatsApp</span>
                 </a>

@@ -69,7 +69,7 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
   );
 
   return (
-    <section id="contact" className="py-16 sm:py-24 bg-[#F8FAFC] relative border-t border-[#E2E6EE]">
+    <section id="contact" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 bg-[#F8FAFC] relative border-t border-[#E2E6EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
@@ -106,18 +106,18 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
                 href="https://wa.me/919421215055?text=Hello%20Go%20Prime%20Services!%20I%20need%20assistance%20with%20legal%20documentation."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-2xl bg-[#EEF2FB] border border-[#CCD6F0] hover:border-[#1F216B] transition-all flex items-center justify-between group cursor-pointer"
+                className="p-3.5 sm:p-4 rounded-2xl bg-[#EEF2FB] border border-[#CCD6F0] hover:border-[#1F216B] transition-all flex items-center justify-between gap-3 group cursor-pointer"
               >
-                <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#25D366] text-white flex items-center justify-center shadow-xs">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
+                  <div className="w-10 h-10 rounded-xl bg-[#25D366] text-white flex items-center justify-center shadow-xs flex-shrink-0">
                     <WhatsappIcon size={20} color="white" strokeWidth={2} />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span className="text-xs font-bold text-[#0F172A] block">WhatsApp Support</span>
-                    <span className="text-xs text-[#555D75]">+91 94212 15055</span>
+                    <span className="text-xs text-[#555D75] truncate block">+91 94212 15055</span>
                   </div>
                 </div>
-                <span className="text-xs font-bold text-[#1F216B] group-hover:underline">
+                <span className="text-xs font-bold text-[#1F216B] group-hover:underline flex-shrink-0 whitespace-nowrap">
                   Chat Now →
                 </span>
               </a>
@@ -125,18 +125,20 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
               {/* Email Card */}
               <a
                 href="mailto:contactgoprimeservices@gmail.com"
-                className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E6EE] hover:border-[#1F216B] transition-all flex items-center justify-between group cursor-pointer"
+                className="p-3.5 sm:p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E6EE] hover:border-[#1F216B] hover:bg-white transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 group cursor-pointer"
               >
-                <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#EEF2FB] text-[#1F216B] flex items-center justify-center">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
+                  <div className="w-10 h-10 rounded-xl bg-[#EEF2FB] text-[#1F216B] flex items-center justify-center flex-shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span className="text-xs font-bold text-[#0F172A] block">Official Email</span>
-                    <span className="text-xs text-[#555D75]">contactgoprimeservices@gmail.com</span>
+                    <span className="text-[11px] sm:text-xs text-[#555D75] break-all sm:break-normal block">
+                      contactgoprimeservices@gmail.com
+                    </span>
                   </div>
                 </div>
-                <span className="text-xs font-bold text-[#1F216B] group-hover:underline">
+                <span className="text-xs font-bold text-[#1F216B] group-hover:underline flex-shrink-0 whitespace-nowrap self-end sm:self-auto">
                   Send Mail →
                 </span>
               </a>
@@ -144,18 +146,18 @@ export default function ContactSection({ selectedServicePreset = "" }: ContactSe
               {/* Phone Desk */}
               <a
                 href="tel:+919421215055"
-                className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E6EE] hover:border-[#1F216B] transition-all flex items-center justify-between group cursor-pointer"
+                className="p-3.5 sm:p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E6EE] hover:border-[#1F216B] hover:bg-white transition-all flex items-center justify-between gap-3 group cursor-pointer"
               >
-                <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#1F216B]/10 text-[#1F216B] flex items-center justify-center">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
+                  <div className="w-10 h-10 rounded-xl bg-[#1F216B]/10 text-[#1F216B] flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <span className="text-xs font-bold text-[#0F172A] block">Call Helpdesk</span>
-                    <span className="text-xs text-[#555D75]">+91 94212 15055</span>
+                    <span className="text-xs text-[#555D75] truncate block">+91 94212 15055</span>
                   </div>
                 </div>
-                <span className="text-xs font-bold text-[#1F216B] group-hover:underline">
+                <span className="text-xs font-bold text-[#1F216B] group-hover:underline flex-shrink-0 whitespace-nowrap">
                   Call Now →
                 </span>
               </a>

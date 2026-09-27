@@ -254,11 +254,28 @@ export default function HeroCutoutZoom({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isIntroCompleted, isClickAnimating, zoomProgress, onZoomStateChange, triggerClickZoom]);
 
+  // Handle external navigation requests (e.g., clicking navbar links on mobile or desktop)
+  useEffect(() => {
+    const handleCompleteIntro = () => {
+      progressRef.current = 1;
+      zoomProgress.set(1);
+      setIsIntroCompleted(true);
+      setIsClickAnimating(false);
+      document.body.style.overflow = "";
+      if (onZoomStateChange) {
+        onZoomStateChange(true);
+      }
+    };
+
+    window.addEventListener("complete-intro", handleCompleteIntro);
+    return () => window.removeEventListener("complete-intro", handleCompleteIntro);
+  }, [zoomProgress, onZoomStateChange]);
+
   return (
     <div
       ref={containerRef}
       id="home"
-      className="relative w-full min-h-screen bg-[#F8FAFC] flex flex-col justify-start overflow-hidden"
+      className="scroll-mt-20 sm:scroll-mt-24 relative w-full min-h-screen bg-[#F8FAFC] flex flex-col justify-start overflow-hidden"
     >
       {/* ================================================================ */}
       {/* LAYER 1: CINEMATIC BACKGROUND VIDEO PLAYER                        */}

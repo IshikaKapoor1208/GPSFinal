@@ -43,8 +43,24 @@ export default function Home() {
       if (!target) return;
 
       event.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.pushState(null, "", hash);
+
+      // Ensure intro screen unfreezes and body scroll is unlocked
+      document.body.style.overflow = "";
+      setIsZoomedIn(true);
+      window.dispatchEvent(new CustomEvent("complete-intro"));
+
+      // Smooth scroll with header offset
+      setTimeout(() => {
+        const headerOffset = 76;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: "smooth",
+        });
+        window.history.pushState(null, "", hash);
+      }, 50);
     };
 
     document.addEventListener("click", handleAnchorClick);
@@ -55,10 +71,22 @@ export default function Home() {
     if (serviceName) {
       setSelectedService(serviceName);
     }
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    document.body.style.overflow = "";
+    setIsZoomedIn(true);
+    window.dispatchEvent(new CustomEvent("complete-intro"));
+
+    setTimeout(() => {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        const headerOffset = 76;
+        const elementPosition = contactSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: "smooth",
+        });
+      }
+    }, 50);
   };
 
   const handleOpenCallback = (serviceName?: string) => {
@@ -75,10 +103,22 @@ export default function Home() {
   const handleSelectServiceFromCatalog = (serviceName: string) => {
     setSelectedService(serviceName);
     setAllServicesModalOpen(false);
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    document.body.style.overflow = "";
+    setIsZoomedIn(true);
+    window.dispatchEvent(new CustomEvent("complete-intro"));
+
+    setTimeout(() => {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        const headerOffset = 76;
+        const elementPosition = contactSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: "smooth",
+        });
+      }
+    }, 50);
   };
 
   const handleOpenZoomModal = (videoIndex?: number) => {
