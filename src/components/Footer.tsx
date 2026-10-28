@@ -202,7 +202,7 @@ export default function Footer({
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
-          <div>
+          <div suppressHydrationWarning>
             &copy; {new Date().getFullYear()} Go Prime Services. All rights reserved.
           </div>
 
